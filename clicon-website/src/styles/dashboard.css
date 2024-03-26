@@ -1,0 +1,302 @@
+.dashboard-body{
+    padding: 40px 0;
+}
+.dashboard-title{
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 28px;
+    color: var(--bs-gray-900);
+    margin-bottom: 20px;
+}
+.dashboard-head{
+    margin-bottom: 30px;
+}
+.dashboard-head p{
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 20px;
+    color: var(--bs-gray-700);
+}
+.dashboard-head p a{
+    color: var(--bs-secondary);
+}
+
+.account-info-card, .billing-info-card{
+    border-radius: 4px;
+    border: 1px solid var(--bs-gray-100);
+}
+.account-info-title, .billing-info-title{
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    padding: 16px 24px;
+    border-bottom: 1px solid var(--bs-gray-100);
+}
+.account-card-body, .billing-card-body{
+    padding: 24px;
+}
+
+.account-card-body a, .billing-card-body a{
+    height: 48px;
+    border-color: var(--bs-secondary-100);   
+    border-radius: 3px !important;
+    font-size: 14px;
+    font-weight: 700;
+    display: inline-flex;
+    font-family: inherit;
+}
+.account-card-header{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.client-image img{
+    min-width: 50px;
+    max-width: 50px;
+    min-height: 50px;
+    max-height: 50px;
+    border-radius: 500px; 
+    object-fit: cover;
+}
+.client-info h6{
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 24px;
+    color: var(--bs-gray-900);
+    padding-bottom: 4px;
+}
+.client-info p{
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    color: var(--bs-gray-600);
+}
+
+.account-card-footer{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 22px 0;
+}
+.billing-card-footer{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 24px 0;
+}
+.account-card-footer li span, .billing-card-footer li span{
+    color: var(--bs-gray-600);
+}
+
+.fun-card-row{
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+.fun-fact-card{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    border-radius: 4px;
+    padding: 16px;
+}
+.fun-icon{
+    min-width: 56px;
+    max-width: 56px;
+    min-height: 56px;
+    max-height: 56px;
+    border-radius: 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #fff;
+}
+.fun-title{
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 28px;
+    color: var(--bs-gray-900); 
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+.fun-text{
+    font-size: 16px;
+    line-height: 24px;
+    color: var(--bs-gray-600);
+}
+
+.dashboard-card{
+    margin: 20px 0;
+    border: 1px solid var(--bs-gray-100);
+    border-radius: 4px;
+}
+.payment-card-head{
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--bs-gray-100);
+}
+.payment-title{
+    text-transform: uppercase;
+    font-size: 16px;
+    word-spacing: .2rem;
+}
+.payment-add-btn{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: 0;
+    border-width: 0;
+    font-size: 16px;
+    color: var(--bs-primary-500);
+}
+.payment-card-body{
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+.bank-card{
+    border-radius: 5px;
+    width: 335px;
+    height: 200px;
+    padding: 25px;
+}
+.bank-card:first-child{
+    background: radial-gradient(98.14% 214.97% at 0% 0%, #1B6392 0%, #124261 100%);
+}
+.bank-card:nth-child(2){
+    background: radial-gradient(98.14% 214.97% at 0% 0%, #248E1D 0%, #2DB324 100%);
+}
+.bank-card:last-child{
+    background: radial-gradient(98.14% 214.97% at 0% 0%, #d51919 0%, #d64e36 100%);
+}
+.bank-card-head{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 25px;
+}
+.card-amount{
+    font-size: 20px;
+    font-weight: bold;
+    color: #fff;
+}
+.option-dots{
+    border: 0;
+    background: none;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.card-option{
+    cursor: pointer;
+}
+.card-option span{
+    display: inline-block;
+    min-width: 5px;
+    max-width: 5px;
+    min-height: 5px;
+    max-height: 5px;
+    border-radius: 500px;
+    background: white;
+    transition: 0.3s;
+    opacity: 0.5;
+    /* margin-bottom: 5px; */
+}
+.bank-card-body h6{
+    text-transform: uppercase;
+    font-size: 14px;
+    margin-bottom: 10px;
+    font-weight: normal;
+    word-spacing: .2rem;
+    color: var(--bs-gray-100);
+}
+.card-num{
+    display: flex;
+    align-items: center; 
+    gap: 5px;
+}
+.card-num span.num{
+    font-size: 22px;
+    line-height: 28px;
+    color: #fff;
+}
+.clipboard{
+    cursor: pointer;
+}
+
+.bank-card-footer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+.card-name svg path{
+    font-size: 20px;
+}
+.card-owner h6{
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 700;
+    color: #fff;
+}
+
+@media screen and (min-width: 1200px) and (max-width: 1600px) {
+    .fun-card-row {
+        gap:48px;
+    }
+    .payment-card-body{
+        justify-content: space-between;
+    }
+    .bank-card{
+        width: 360px;
+    }
+}
+
+@media screen and (max-width: 1600px) {
+    .account-card-footer{
+        margin-bottom: 45px!important;
+    }
+}
+@media screen and (min-width: 768px) and (max-width: 1200px){
+    .billing-card-footer{
+        margin: 35px 0;
+    }
+} 
+
+@media screen and (max-width: 1200px) { 
+    .fun-card-row{
+        margin-top: 20px!important;
+    }
+    .bank-card{ 
+        width: 100%; 
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .account-card-footer{
+        margin: 23px 0;
+    }
+}
+
+@media screen and (max-width: 575px) {
+    .card-row{
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+    .fun-card-row{
+        gap: 15px;
+    }
+    .fun-card-row .col-12{
+        padding: 0 20px!important;
+        width: 100%!important;
+        margin-bottom: 0!important;
+    }
+}

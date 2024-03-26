@@ -1,0 +1,118 @@
+.compare-body{
+    padding: 72px 0;
+}
+.compare-table {
+    border: 1px solid #E4E7E9;
+    box-sizing: border-box;
+    border-radius: 4px; 
+}
+.compare-table table{ 
+    width: 100%;
+    color: #212529;
+    vertical-align: top;
+    border-color: #dee2e6;
+    border-collapse: collapse;
+}
+.compare-table table thead tr th{
+    width: 25% !important;
+    padding: 0 !important;
+}
+
+.compare-card{
+    padding: 32px; 
+    border: 1px solid var(--bs-gray-100);
+    border-right: 0;
+    border-top: 0;
+    border-bottom: 0;
+}
+.compare-close-button{
+    text-align: center;
+    margin-bottom: 16px;
+}
+.compare-close-button button{
+    border: 0;
+    background: none;
+    padding: 0;
+}
+.compare-image{
+    width: 100%;
+}
+.compare-content{
+    font-weight: normal;
+    font-size: 16px;
+    height: 75px;
+    line-height: 24px;
+    color: var(--bs-gray-900);
+    margin-bottom: 20px;
+    text-align: start;
+}
+.compare-add-button-group {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+}
+.compare-add-button-group .compare-add{
+    width: 260px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.wishlist-compare-btn{
+    min-width: 48px;
+    max-width: 48px;
+    min-height: 48px;
+    max-height: 48px;
+    border-radius: 2px;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1.5px solid var(--bs-primary-500);
+    background: white!important; 
+    color: var(--bs-primary-500);
+    transition: .3s;
+}
+.wishlist-compare-btn.disable{
+    border: 1.5px solid var(--bs-gray-500);
+    background: white!important; 
+    color: var(--bs-gray-500);
+}
+.wishlist-compare-btn:hover{
+    background: var(--bs-primary-500)!important;
+    color: #fff;
+}
+.wishlist-compare-btn.disable:hover{
+    background: var(--bs-gray-500)!important; 
+}
+
+.table-product tbody tr td:not(.table-product tbody tr td:last-child){
+    border-right: 1px solid var(--bs-gray-100);
+}
+.table-product tbody tr td.option{
+    padding: 14px 32px 14px 24px;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 20px;
+    color: var(--bs-gray-700);
+}
+.table-product tbody tr:nth-of-type(odd) > * {
+    background: var(--bs-gray-50) !important;
+}
+.table-ratings {
+    font-size: 16px;
+    padding: 14px 32px;    
+}
+.table-ratings ul{
+    display: flex; 
+    gap: 5px;
+}
+.table-ratings ul li:not(.table-ratings ul li.table-rating-count){
+    color: var(--bs-primary-500);
+}
+.table-ratings ul li.table-rating-count{
+    color: var(--bs-gray-500);
+}
+.table-rating-count{
+    padding-left: 10px;
+}

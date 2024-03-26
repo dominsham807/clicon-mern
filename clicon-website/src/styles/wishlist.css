@@ -1,0 +1,183 @@
+.wishlist-body{
+    padding: 70px 0;
+}
+
+.wishlist-title{
+    text-align: center;
+    padding: 20px 24px;
+    font-weight: 800;
+    font-size: 18px;
+    line-height: 24px;
+    color: var(--bs-gray-900);
+}
+.wishlist-table table{
+    border: 1px solid var(--bs-gray-100);
+    border-radius: 0 0 4px 4px !important;
+    border-collapse: collapse;
+    margin: 0;
+    padding: 0;
+    table-layout: fixed;
+}
+.wishlist-table table thead tr{
+    background-color: var(--bs-gray-50);
+    border: 1px solid var(--bs-gray-100);
+}
+.wishlist-table table thead tr th{
+    padding: 10px 24px;
+    font-weight: 600;
+    text-align: start;
+    font-size: 12px;
+    text-transform: uppercase;
+    color: var(--bs-gray-700);
+}
+
+.wishlist-table table tbody tr{
+    position: relative;
+}
+
+.wishlist-product-wrapper{
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 24px;
+    padding-bottom: 16px;
+}
+.wishlist-product-text{
+    font-size: 14px;
+    line-height: 20px;
+    color: var(--bs-gray-700);
+}
+.wishlist-table tbody tr td.wishlist-price,
+.wishlist-table tbody tr td.wishlist-stock,
+.wishlist-table tbody tr td.wishlist-actions{
+    padding: 12px 24px;
+}
+
+.wishlist-price del{
+    padding-right: 10px;
+}
+.wishlist-stock{
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+}
+.wishlist-button-wrapper{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.wishlist-button-wrapper .add-to-cart-btn.disabled{
+    border-color: white !important;
+    cursor: auto;
+    color: white !important;
+    background: var(--bs-gray-300) !important;
+}
+.wishlist-button-wrapper .add-to-cart-btn.disabled:hover{
+    border-color: white !important; 
+    color: white !important;
+    background: var(--bs-gray-300) !important;
+}
+.wishlist-button-wrapper .add-to-cart-btn.disabled:hover svg path{
+    stroke: white;
+}
+.wishlist-button-wrapper .close-btn{
+    background: transparent;
+    border: 0;
+    padding-top: 10px;
+}
+
+@media screen and (max-width: 991px) {
+    .wishlist-table table{
+        border: 0;
+    }
+    .wishlist-table table thead{
+        border: none;
+        clip: rect(0 0 0 0);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+    }
+    .wishlist-table table tbody tr {
+        border-radius: 4px;
+        border: 1px solid var(--bs-gray-100);
+        display: block;
+        margin-bottom: 20px;
+    }
+    .wishlist-table table td{
+        border-bottom: 1px solid #ddd;
+        display: block;
+        text-align: right;
+    }
+    .wishlist-table table tbody tr td.wishlist-product::before{
+        content: "Product";
+        padding: 24px;
+        padding-top: 50px;
+        padding-right: 0;
+        float: left;
+        font-weight: 600;
+        font-size: 14px;
+        text-transform: uppercase;
+        color: var(--bs-gray-700);
+    }
+  .wishlist-table table tbody tr td.wishlist-price::before{
+        content: "Price";
+        float: left;
+        font-weight: 600;
+        font-size: 14px;
+        text-transform: uppercase;
+        color: var(--bs-gray-700);
+    }
+    .wishlist-table table tbody tr td.wishlist-stock::before{
+        content: "Stock Status";
+        float: left;
+        font-weight: 600;
+        font-size: 14px;
+        text-transform: uppercase;
+        color: var(--bs-gray-700);
+    }
+    .wishlist-table table tbody tr td.wishlist-actions{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 0;
+    }
+    .wishlist-table table tbody tr td.wishlist-actions::before{
+        content: "Actions";
+        float: left;
+        font-weight: 600;
+        font-size: 14px;
+        text-transform: uppercase;
+        color: var(--bs-gray-700);
+    }  
+    .close-btn{
+        position: absolute;
+        top: 0;
+        right: 10px;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .wishlist-title{
+        text-align: start;
+        border-radius: 4px 4px 0 0;
+        border: 1px solid var(--bs-gray-100);
+        border-bottom: 0;
+    }
+
+    .wishlist-table tbody tr td.wishlist-product{
+        width: 579px;
+    }
+    .wishlist-table tbody tr td.wishlist-price{
+        width: 236px;
+    }
+    .wishlist-table tbody tr td.wishlist-stock{
+        width: 224px;
+    }
+    .wishlist-table tbody tr td.wishlist-actions{
+        width: 266px;
+    }
+}

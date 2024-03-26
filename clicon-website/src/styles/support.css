@@ -1,0 +1,96 @@
+.support-section-banner{
+    background-image: url('https://clicon-html.netlify.app/image/support/banner.png');
+    background-size: cover;
+    padding: 72px 0;
+}
+.content-area .subtitle{
+    display: inline-flex;
+    margin-bottom: 16px;
+    font-weight: 700;
+    padding: 8px 16px;
+    border-radius: 2px;
+    font-size: 14px;
+    line-height: 20px;
+    background: var(--bs-warning-400);
+    color: var(--bs-gray-900);
+}
+.content-area h2{
+    margin-bottom: 24px;
+    font-weight: 800;
+    font-size: 32px;
+    line-height: 40px;
+    color: var(--bs-gray-900);
+}
+
+.content-area-search .form-group{
+    position: relative;
+}
+.content-area-search .form-group .form-control {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    padding-right: 130px;
+    padding-left: 55px;
+    height: 72px;
+    border: 1px solid var(--bs-gray-100);
+}
+.content-area-search .form-group .search-icon{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 24px;
+}
+.content-area-search .form-group button{
+    right: 12px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.features-section-01{
+    padding: 65px 0;
+}
+.features-section-title{
+    margin-bottom: 40px;
+    text-align: center;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 40px;
+    color: var(--bs-gray-900);
+}
+.feature-widgets-row [class^=col], .widgets-row [class^=col], .card-row [class^=col] {
+    margin-bottom: 24px;
+}
+.features-card{
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    flex-direction: row;
+    border: 2px solid var(--bs-primary-100);
+    border-radius: 4px;
+    background: #FFFFFF;
+    padding: 24px;
+    transition: 0.3s;
+    cursor: pointer;
+}
+.features-card:hover{
+    border-color: var(--bs-primary-500);
+    box-shadow: 0px 8px 40px rgba(250, 130, 50, 0.12);
+}
+.features-card img{
+    max-width: 100%;
+}
+.features-card-title{
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    padding: 0;
+    color: var(--bs-gray-900);
+}
+
+@media screen and (max-width: 576px) {
+    .card-row .col-12{
+        padding: 0 40px;
+        margin-bottom: 10px!important;
+    }
+}

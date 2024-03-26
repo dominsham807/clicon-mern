@@ -1,0 +1,24 @@
+.breadcrumb{
+    margin: 0;
+    padding: 26px 0;
+    background: var(--bs-gray-50);
+    display: flex;
+    flex-wrap: wrap;
+}
+.breadcrumb-navigation{
+    padding-left: 3px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 20px;
+    flex-wrap: wrap;
+    color: var(--bs-gray-600);
+}
+.main-parent{
+    gap: 5px;
+}
+.main-section{
+    color: #2DA5F3;
+}

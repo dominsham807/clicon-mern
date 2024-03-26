@@ -1,0 +1,117 @@
+.mode-switcher-panel-wrapper{
+    position: fixed;
+    right: 0;
+    transform: translateY(-7%) translateX(100%);
+    top: 10%;
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.15);
+    z-index: 99;
+    transition: .4s;
+}
+.mode-switcher-panel-wrapper.open{
+    transform: translateX(0) translateY(-7%);
+}
+
+.mode-switcher-panel{
+    position: relative;
+    padding: 25px 0 30px;
+    background: #fff;
+    border-radius: 0 2px 2px 0;
+}
+.panel-group{
+    padding: 0 30px;
+}
+.panel-title{ 
+    position: relative;
+    margin-bottom: 12px;
+    z-index: 0;
+}
+.panel-title h6{
+    font-size: 15px;
+    font-weight: bold;
+    display: inline-block;
+    padding-right: 10px;
+    color: #333; 
+    background: #fff;
+    padding-bottom: 10px;
+    margin-bottom: 0;
+    border-bottom: none;
+}
+.panel-title::after{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 10px;
+    height: 1px;
+    width: 100%;
+    background: #ebebeb;
+    z-index: -1;
+}
+
+.color-skin{
+    display: flex;
+    flex-wrap: wrap;
+    margin: -7px -7px 13px;
+    padding-left: 0;
+}
+.color-item{
+    display: inline-block;
+    position: relative;
+    flex: 1 0 calc(25% - 16px);
+    margin: 7px;
+    border-radius: 2px;
+    cursor: pointer;
+}
+.color-item::before{
+    width: 5px;
+    content: "";
+    display: block;
+    padding-bottom: 100%;
+}
+.color-item::after{
+    position: absolute;
+    content: "";
+    left: 50%;
+    top: calc(50% - 5px);
+    height: 7px;
+    width: 12px;
+    border: 2px solid #fff;
+    border-top: none;
+    border-right: none;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-50%) rotate(-45deg);
+}
+
+.switcher-minimize-button{
+    position: absolute;
+    top: 30px;
+    border: 0;
+    left: -50px;
+    padding-left: 8px;
+    display: flex;
+    height: 50px;
+    width: 50px;
+    font-size: 22px; 
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    border-radius: 50% 0 0 50%;
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    z-index: -1;
+}
+.switcher-minimize-button svg{
+    animation: rotation 5s infinite linear;
+    font-size: inherit;
+    pointer-events: none;
+    transition: 0.4s;
+}
+
+@keyframes rotation {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(359deg);
+    }
+}

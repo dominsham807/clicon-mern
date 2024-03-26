@@ -1,0 +1,37 @@
+.dashboard-body{
+    padding: 20px 0;
+}
+
+.account-setting{
+    border-radius: 4px;
+    border: 1px solid var(--bs-gray-100);
+}
+.setting-title{
+    border-bottom: 1px solid var(--bs-gray-100);
+    padding: 16px 24px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    color: var(--bs-gray-900);
+}
+
+.account-setting-main{
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+    padding: 24px;
+}
+.account-setting-main .profile{
+    min-width: 150px;
+    max-width: 150px;
+    min-height: 150px;
+    max-height: 150px; 
+}
+.account-setting-main .profile img{   
+    min-width: 100%;
+    border-radius: 2px;
+    object-fit: cover;
+}
+.account-setting-main .setting-form .form-group{
+    margin-bottom: 20px;
+}

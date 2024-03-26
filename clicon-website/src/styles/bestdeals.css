@@ -1,0 +1,395 @@
+.bestdeal-section{
+    padding: 40px 0;
+}
+
+.bestdeal-section__1-wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.bestdeal-timer{
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+.bestdeal-title{
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.timer-yellow{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.bestdeal-countdown{
+    background: #EBC80C;
+    padding: 10px;
+    border-radius: 2px;
+    display: inline-flex;
+    gap: 20px;
+}
+
+.bestdeals-browse__btn{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--bs-secondary-500);
+    cursor: pointer;
+    position: relative;
+    padding: 8px 0;
+}
+.bestdeals-browse__btn::before{
+    content: "";
+    position: absolute;
+    background: var(--bs-secondary-500);
+    height: 2px;
+    width: 0%;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: 0.3s;
+}
+.bestdeals-browse__btn:hover::before{
+    visibility: visible;
+    opacity: 1;
+    width: 100%;
+}
+
+.bestdeal-section__product-area{
+    display: flex;
+    padding: 20px 0;
+}
+.bestdeal-section__product-area-big{
+    width: 320px;
+}
+.product-big__card{
+    position: relative;
+    background: white;
+    border: 1px solid var(--bs-gray-100);
+    height: 100%;
+    padding: 10px 20px;
+}
+.big-card-body{
+    padding: 10px 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.card-rating-section{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    color: #77878F !important;
+}
+.card-stars{
+    color: #EBC80C;
+    display: flex;
+    gap: 2px;
+}
+.card-product-text{
+    text-align: justify;
+    font-size: 22px;
+    font-weight: normal; 
+    line-height: 28px;
+}
+.big-card-price{
+    display: flex;
+    gap: 5px;
+    font-weight: 600;
+    font-size: 20px !important;
+    line-height: 20px;
+    color: var(--bs-secondary-500);
+}
+.card-price{
+    display: flex;
+    gap: 5px;
+    font-weight: 600;
+    font-size: 14px !important;
+    line-height: 20px;
+    color: var(--bs-secondary-500);
+}
+.sold-out-badge{
+    position: absolute;
+    top: 10px;
+    left: 8px;    
+    background-color: #929FA5;
+    color: #fff;
+    padding: 5px 10px;
+    font-weight: 600;
+    font-size: 12px;
+    border-radius: 2px;
+    text-transform: uppercase;
+    line-height: 16px;
+}
+.product-discount-badge{
+    position: absolute;
+    top: 10px;
+    left: 8px;    
+    padding: 5px 10px;
+    font-weight: 600;
+    font-size: 12px;
+    border-radius: 2px;
+    text-transform: uppercase;
+    line-height: 16px;
+    position: absolute;  
+    background: #EBC80C;
+}
+.product-hot-badge{
+    position: absolute;
+    top: 10px;
+    left: 8px;    
+    padding: 5px 10px;
+    font-weight: 600;
+    font-size: 12px;
+    border-radius: 2px;
+    text-transform: uppercase;
+    line-height: 16px;
+    position: absolute;   
+    background: #EE5858;   
+    color: #fff;
+}
+
+.big-card-price del,.card-price del{
+    color: #77878F;
+}
+.big-card-product-description{
+    text-align: justify;
+    font-size: 16px !important;  
+}
+.card-body{
+    display: flex;
+    flex-direction: column;
+    padding: 5px 10px;
+    gap: 10px;
+}
+.card-body p{
+    font-size: 12px;
+    text-align: justify;
+}
+
+.bestdeal-section__product-area-main{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+.product-card{
+    position: relative;
+    padding: 10px;
+    background: white;
+    border: 1px solid var(--bs-gray-100); 
+}
+.card-image{
+    position: relative;
+    margin-bottom: 8px;
+}
+.card-image::before{
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.4s;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    content: "";
+    background: rgba(0, 0, 0, 0.2);
+}
+.product-card:hover .card-image::before{
+    opacity: 1;
+    visibility: visible;
+}
+
+.card-hover{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    right: 0;
+    justify-content: center;
+    display: flex;
+    transition: 0.4s;
+    visibility: hidden;
+    opacity: 0;
+    align-items: center;
+    margin: 0 -4px;
+}
+.card-hover a{
+    margin: 0 4px;
+    background: white;
+    transition: 0.3s;
+    min-width: 48px;
+    max-width: 48px;
+    min-height: 48px;
+    max-height: 48px;
+    border-radius: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.product-card:hover .card-hover{
+    opacity: 1;
+    visibility: visible;
+}
+.card-hover a:hover{
+    background: var(--bs-primary-500);
+}
+.card-hover a:hover svg path{
+    stroke: #fff;
+    transition: 0.3s;
+}
+
+.card-title{
+    text-align: justify;
+    font-size: 18px;
+    font-weight: normal;
+    line-height: 22px;
+    height: 66px;
+}
+
+.card-button-group{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+.wishlist-btn, .view-btn{
+    min-width: 48px;
+    max-width: 48px;
+    min-height: 48px;
+    max-height: 48px;
+    border-radius: 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--bs-primary-100);
+    transition: .3s;
+    cursor: pointer;
+}
+.wishlist-btn:hover, .view-btn:hover{
+    border: 1.5px solid var(--bs-primary-500);
+}
+.wishlist-btn svg path, .add-to-cart-btn svg path, .view-btn svg path{
+    transition: 0.3s;
+}
+.wishlist-btn:hover svg path, .view-btn:hover svg path{
+    stroke: var(--bs-primary-500);
+}
+.add-to-cart-btn:hover svg path{
+    stroke: black;
+}
+.add-to-cart-btn{
+    height: 48px;
+    white-space: nowrap; 
+    border: 2px solid var(--bs-primary-500);
+    background: var(--bs-primary-500);
+    color: white;
+    border-radius: 3px;
+    font-size: 14px;
+    font-weight: 700;
+    display: inline-flex;
+    gap: 10px;
+    padding: 0.9em 1.6em;
+    line-height: 1;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s;
+    cursor: pointer;
+}
+.add-to-cart-btn:hover{
+    color: var(--bs-gray-900);
+    border: 2px solid var(--bs-primary-500);
+    background: transparent;
+}
+
+.offer-tag{
+    position: absolute;
+    top: 10px;
+    left: 16px;
+}
+.discount-badge{
+    display: table;
+    background-color: #EBC80C;
+    color: #191C1F;
+    padding: 5px 10px;
+    font-weight: 600;
+    font-size: 12px;
+    border-radius: 2px;
+    text-transform: uppercase;
+    line-height: 16px;
+    margin-bottom: 5px;
+}
+.hot-badge{
+    display: table;
+    background-color: #EE5858;
+    color: #fff;
+    padding: 5px 10px;
+    font-weight: 600;
+    font-size: 12px;
+    border-radius: 2px;
+    text-transform: uppercase;
+    line-height: 16px;
+}
+
+@media screen and (min-width: 1600px) {
+    .card-title{
+        height: 40px;
+    }
+    .big-card-product-description{
+        padding: 20px 0;
+    }
+    .banner-area{
+        gap: 35px;
+    }
+}
+
+@media screen and (max-width: 1400px) {
+    .card-price{
+        padding-top: 30px;
+    }    
+}
+
+@media screen and (max-width: 1200px) {
+    .bestdeal-section__product-area{
+        display: flex;
+        flex-direction: column;
+    }
+    .bestdeal-section__product-area-big{
+        width: 100%;
+    }
+    .product-big__card{
+        display: flex;
+        gap: 12px;
+        align-items: center;
+    }
+    .big-card-product-description{
+        font-size: 12px !important;
+    }
+    .big-card-body{
+        gap: 10px;
+    }
+    .card-price{
+        padding-top: 20px;
+    }
+    .card-title{
+        height: 30px;
+    }
+}
+
+@media screen and (max-width: 991px) {
+    .bestdeal-section__product-area-main{
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .bestdeal-section__product-area-big{
+        display: none;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .bestdeal-section__product-area-main{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
