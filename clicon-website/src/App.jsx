@@ -17,10 +17,12 @@ import ModeSwitcher from './components/ModeSwitcher'
 import TrackOrder from './pages/TrackOrder'
 import Faq from './pages/Faq'
 import Support from './pages/Support'
-
-import './App.css'
 import Checkout from './pages/Checkout'
 import Compare from './pages/Compare'
+
+import './App.css'
+
+import { Toaster } from 'react-hot-toast'
 
 function App() {  
   return (
@@ -46,6 +48,7 @@ function App() {
           <Route path='/support' element={<Support />} />
           <Route path='/faq' element={<Faq />} />
           <Route path='*' element={<PageNotFound />} />
+          <Toaster position='bottom-center' />
         </Route> 
       </Routes>
       <ModeSwitcher />

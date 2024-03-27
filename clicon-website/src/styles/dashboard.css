@@ -92,7 +92,7 @@
 .fun-card-row{
     display: flex;
     flex-direction: column;
-    gap: 25px;
+    gap: 5px;
 }
 .fun-fact-card{
     display: flex;
@@ -249,7 +249,7 @@
 
 @media screen and (min-width: 1200px) and (max-width: 1600px) {
     .fun-card-row {
-        gap:48px;
+        gap: 26px;
     }
     .payment-card-body{
         justify-content: space-between;
