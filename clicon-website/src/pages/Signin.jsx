@@ -1,11 +1,44 @@
 import React, { useState } from 'react'
-
-import "../styles/account.css"
 import { FaArrowRight, FaEye } from 'react-icons/fa'
 import BreadCrumb from '../components/BreadCrumb'
+import { useNavigate } from 'react-router-dom'
+import { useDispatch } from "react-redux"
+import { BACKEND_URL } from '../constants'
+import { loginUser } from '../redux/reducers/userReducer.js'
+import toast from 'react-hot-toast'
+import axios from 'axios'
+
+import "../styles/account.css"
 
 const Signin = () => {
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
     const [showPassword, setShowPassword] = useState(false)
+
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+
+    const handleSignin = async(e) => {
+        e.preventDefault()
+
+        try{
+            const res = await axios.post(`${BACKEND_URL}/api/v1/auth/login`, {
+                email, password
+            }, {
+                withCredentials: true,
+            })
+            if(res?.data?.success){
+                dispatch(loginUser(res.data.user))
+                toast.success(res.data.message)
+                navigate("/")
+            } else{
+                toast.error(res?.data?.message)
+            }
+        } catch(error){
+            console.log(error)
+            toast.error("Something went wrong")
+        }
+    }
 
     return (
         <>
@@ -20,15 +53,15 @@ const Signin = () => {
                                 <a href="/signup" className="head-btn text-gray-500">Sign Up</a>
                             </div>
                             <div className="account-wrapper-form">
-                                <form action="#"> 
+                                <form onSubmit={handleSignin}> 
                                     <div className="form-group">
                                         <label htmlFor="emailAddress" className='form-label'>Email Address</label>
-                                        <input type="email" id='emailAddress' className='form-control' />
+                                        <input type="email" id='emailAddress' className='form-control' value={email} onChange={(e) => setEmail(e.target.value)} />
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="signupPassword" className='form-label'>Password</label>
                                         <div className="password-box">
-                                            <input type={showPassword ? "text" : "password"} id='signupPassword' className='form-control' /> 
+                                            <input type={showPassword ? "text" : "password"} id='signupPassword' className='form-control' value={password} onChange={(e) => setPassword(e.target.value)} /> 
                                             <FaEye className='password-eye' onClick={() => setShowPassword(!showPassword)} /> 
                                         </div> 
                                         <a href="/forget-password" className="forgot-btn">Forget Password</a>

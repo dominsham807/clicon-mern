@@ -26,11 +26,14 @@ const userSchema = new mongoose.Schema({
             message : 'Please provide a valid email'
         }
     },
+    phone: {
+        type: String,
+    },
     address: {
         type : String,
     },
     image: {
-        type : String
+        type: {},
     },
     password:{
         type: String,

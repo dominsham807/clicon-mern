@@ -24,7 +24,7 @@ export const registerUser = async(req, res) => {
         const origin = 'http://localhost:5173'
         
         await sendVerificationEmail({ name: user.lastName, email: user.email, verificationToken: user.verificationToken, origin })
-        res.status(StatusCodes.CREATED).json({ success: true, message: "Please verify your email" })
+        res.status(StatusCodes.CREATED).json({ success: true, message: "Register success! Please verify your email before login" })
     } catch(error){    
         res.status(500).send({
             success: false,
@@ -40,11 +40,15 @@ export const verifyEmail = async(req, res) => {
         const { verificationToken, email } = req.body 
 
         const user = await User.findOne({ email: email })
+        console.log(user)
 
         if(!user){
             throw new UnauthenticatedError("Verification failed") 
         }
 
+        console.log(user.verificationToken)
+        console.log(verificationToken)
+        
         if(verificationToken !== user.verificationToken){
             throw new UnauthenticatedError("Verification failed") 
         }

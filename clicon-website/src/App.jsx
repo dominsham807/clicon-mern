@@ -19,10 +19,11 @@ import Faq from './pages/Faq'
 import Support from './pages/Support'
 import Checkout from './pages/Checkout'
 import Compare from './pages/Compare'
-
-import './App.css'
+import Verify from './pages/Verify' 
 
 import { Toaster } from 'react-hot-toast'
+
+import './App.css'
 
 function App() {  
   return (
@@ -43,14 +44,15 @@ function App() {
           <Route path='/compare' element={<Compare />} />
           <Route path='/signin' element={<Signin />} />
           <Route path='/signup' element={<Signup />} />
+          <Route path='/verify' element={<Verify />} /> 
           <Route path='/settings' element={<Settings />} />
           <Route path='/blog' element={<Blog />} />
           <Route path='/support' element={<Support />} />
           <Route path='/faq' element={<Faq />} />
-          <Route path='*' element={<PageNotFound />} />
-          <Toaster position='bottom-center' />
+          <Route path='*' element={<PageNotFound />} /> 
         </Route> 
       </Routes>
+      <Toaster position='bottom-center' />
       <ModeSwitcher />
     </BrowserRouter>
   )

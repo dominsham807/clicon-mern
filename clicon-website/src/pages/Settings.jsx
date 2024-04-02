@@ -1,10 +1,23 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import BreadCrumb from '../components/BreadCrumb'
 import DashboardSideNav from '../components/DashboardSideNav'
+import axios from 'axios'
+import { BACKEND_URL } from '../constants'
 
-import "../styles/settings.css"
+import "../styles/settings.css" 
 
 const Settings = () => {
+    const getProfile = async() => {
+        const profile = await axios.get(`${BACKEND_URL}/api/v1/user/profile`)
+        console.log(profile)
+    }
+
+    useEffect(() => {
+        getProfile()
+    }, [])
+
+    const [firstName, setFirstName] = useState("")
+    const [lastName, setLastName] = useState("")
     const [displayName, setDisplayName] = useState("Dominic Sham")
     const [username, setUsername] = useState("dominicsham807")
     const [fullName, setFullName] = useState("Sham Ching Hei Dominic")
@@ -34,7 +47,7 @@ const Settings = () => {
                                             <div className="col-sm-6">
                                                 <div className="form-group">
                                                     <label htmlFor="displayName" className="form-label">
-                                                        Display Name 
+                                                        First Name 
                                                     </label>
                                                     <input type="text" value={displayName} className="form-control" onChange={(e) => setDisplayName(e.target.value)} />
                                                 </div>
@@ -42,15 +55,15 @@ const Settings = () => {
                                             <div className="col-sm-6">
                                                 <div className="form-group">
                                                     <label htmlFor="username" className="form-label">
-                                                        Username
+                                                        Last Name 
                                                     </label>
                                                     <input type="text" value={username} className="form-control" onChange={(e) => setUsername(e.target.value)} />
                                                 </div>
                                             </div>
                                             <div className="col-sm-6">
                                                 <div className="form-group">
-                                                    <label htmlFor="fullName" className="form-label">
-                                                        Full Name 
+                                                    <label htmlFor="username" className="form-label">
+                                                        Username
                                                     </label>
                                                     <input type="text" value={fullName} className="form-control" onChange={(e) => setFullName(e.target.value)} />
                                                 </div>

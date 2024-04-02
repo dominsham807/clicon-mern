@@ -4,6 +4,7 @@ import BreadCrumb from '../components/BreadCrumb'
 import { FaArrowRight, FaEye } from 'react-icons/fa'
 import { BACKEND_URL } from '../constants'
 import { useNavigate } from 'react-router-dom'
+import toast from 'react-hot-toast'
 
 import "../styles/account.css"
 
@@ -11,8 +12,7 @@ const Signup = () => {
     const [showPassword, setShowPassword] = useState(false)
     const [showConfirmPassword, setShowConfirmPassword] = useState(false)
 
-    const [checkTandC, setCheckTandC] = useState(false)
-    console.log(checkTandC)
+    const [checkTandC, setCheckTandC] = useState(false) 
 
     const [firstName, setFirstName] = useState("")
     const [lastName, setLastName] = useState("")
@@ -21,28 +21,36 @@ const Signup = () => {
     const [password, setPassword] = useState("")
     const [confirmPassword, setConfirmPassword] = useState("")
    
+    const [errorMessage, setErrorMessage] = useState("")
+
     const navigate = useNavigate()
 
     const handleSignup = async(e) => {
         e.preventDefault()
 
         try{
-            if(password !== confirmPassword){
-                toast.error("Passwords not matched! Please try again!")
+            if(!firstName || !lastName || !username || !email || !password || !confirmPassword){
+                toast.error("Please fill in all the fields")
+            } else{
+                if(password !== confirmPassword){
+                    toast.error("Passwords not matched! Please try again!")
+                } else if(!checkTandC){
+                    toast.error("Please accept the condition to proceed")
+                } else{
+                    const res = await axios.post(`${BACKEND_URL}/api/v1/auth/register`,{
+                        firstName, lastName, username, email, password, confirmPassword
+                    })
+                    if(res.data.success){
+                        toast(res.data.message, { type: "success", draggable: false })
+                        navigate("/signin")
+                    } else{
+                        setErrorMessage(res.data.message)
+                    }
+                } 
             } 
-
-            if(!checkTandC){
-                toast.error("Please accept the condition to proceed")
-            }
-
-            const res = await axios.post(`${BACKEND_URL}/api/v1/auth/register`,{
-                firstName, lastName, username, email, password, confirmPassword
-            })
-            if(res.data.success){
-
-            }
         } catch(error){
-
+            console.log(error)            
+            toast("Something Went Wrong", { type: "error", draggable:false })
         }
     }
 
@@ -105,6 +113,11 @@ const Signup = () => {
                                             </label>
                                         </div>
                                     </div>
+                                    {errorMessage && (
+                                        <div className="error-message-wrapper">
+                                            {errorMessage}
+                                        </div>
+                                    )}
                                     <button className="btn btn-primary w-100 signup-btn" type='submit'>
                                         Sign Up <FaArrowRight />
                                     </button>

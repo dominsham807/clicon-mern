@@ -6,6 +6,9 @@ export const authenticateUser = async(req, res, next) => {
     const refreshToken = req.signedCookies.refreshToken
     const accessToken = req.signedCookies.accessToken
 
+    console.log(refreshToken)
+    console.log(accessToken)
+    
     try{
         if(accessToken){
             const { payload } = verifyToken(accessToken)

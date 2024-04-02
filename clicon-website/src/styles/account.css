@@ -105,6 +105,45 @@
     cursor: pointer;
 }
 
+.account-wrapper.verify{
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+}
+.account-header-text{
+    text-align: center;
+    padding: 32px;
+    padding-bottom: 0;
+}
+.account-header-text h2{ 
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 28px;
+    color: var(--bs-gray-900);
+    margin-bottom: 12px;
+}   
+.account-checkmark-logo img{
+    width: 50%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.account-wrapper-text{
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 20px;
+    color: var(--bs-gray-600);
+    text-align: center;
+    padding: 20px;
+}
+.account-login-btn{
+    margin: 20px;
+}
+
+.error-message-wrapper{
+    color: red;
+}
+
 .signup-btn, .login-btn{
     display: flex;
     gap: 10px;

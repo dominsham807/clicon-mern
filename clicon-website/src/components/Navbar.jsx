@@ -4,13 +4,21 @@ import { CiCircleInfo, CiLocationOn } from "react-icons/ci"
 import { FaHeadphones, FaCodeCompare } from "react-icons/fa6"
 import { IoCall } from "react-icons/io5"
 import { IoMdMenu } from "react-icons/io";
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 import Logo from "/logo.png" 
 
 import "../styles/navbar.css"
 
+
 const Navbar = () => { 
     const location = useLocation() 
+
+    const { user } = useSelector((state) => state.userReducer)
+    console.log(user)
+
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     const [languageOpen, setLanguageOpen] = useState(false)
     const [currencyOpen, setCurrencyOpen] = useState(false)
@@ -29,7 +37,7 @@ const Navbar = () => {
     const [showAccount, setShowAccount] = useState(false)
 
     const [showPassword, setShowPassword] = useState(false)
-
+ 
     let languageRef = useRef()
     let currencyRef = useRef()
     let categoryRef = useRef()
@@ -314,8 +322,8 @@ const Navbar = () => {
                                 </div>
                             </div> 
                         </div>  
-                    </div>
-                    
+                    </div> 
+
                     <div className="account">
                         <div ref={accountRef}>
                             <div className="account-btn" onClick={() => setShowAccount(!showAccount)} ref={accountRef}>
@@ -326,36 +334,47 @@ const Navbar = () => {
                             </div>
                             <div className={`account-popup ${showAccount ? 'active' : ""}`}>
                                 <div className="popup-login-header">
-                                    <h6 className="title">Login to your account</h6>
+                                    {user ? <h6 className='title'>Welcome {user?.name}!</h6> : <h6 className="title">Login to your account</h6>}
                                 </div>
-                                <div className="popup-form">
-                                    <form>
-                                        <div className="form-group">
-                                            <label htmlFor="email" className='form-email'>Email Address</label>
-                                            <input type="email" className='form-control' id='email' placeholder='example@gmail.com' />
-                                        </div>
-                                        <div className="form-group password">
-                                            <label htmlFor="password" className='form-password'>Password</label>
-                                            <input type={showPassword ? "text" : "password"} className='form-control password' id='password' placeholder='Your Password' />
-                                            <FaEye onClick={() => setShowPassword(!showPassword)} className='password-eye' />
-                                        </div>
-                                        <button type='submit' className="btn btn-primary w-100 login-btn">
-                                            Login
-                                            <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M3.625 10H17.375" stroke="#191C1F" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path>
-                                                <path d="M11.75 4.375L17.375 10L11.75 15.625" stroke="#191C1F" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path>
-                                            </svg>
-                                        </button>
-                                    </form>
-                                    <div className="form-bottom">
-                                        <div className='bottom-text'>
-                                            <p className="text">Don't have an account?</p>
-                                        </div>
-                                        <a href='/signup' className='btn btn-outline-primary w-100 create-account-btn'>
-                                            Create Account
+                                {user ? (
+                                    <div className="popup-window">  
+                                        <a href='/settings' className="btn btn-primary w-100">
+                                            Settings
                                         </a>
+                                        <button className="btn btn-primary w-100">
+                                            Logout
+                                        </button> 
+                                    </div> 
+                                ):(
+                                    <div className="popup-form">
+                                        <form>
+                                            <div className="form-group">
+                                                <label htmlFor="email" className='form-email'>Email Address</label>
+                                                <input type="email" className='form-control' id='email' placeholder='example@gmail.com' />
+                                            </div>
+                                            <div className="form-group password">
+                                                <label htmlFor="password" className='form-password'>Password</label>
+                                                <input type={showPassword ? "text" : "password"} className='form-control password' id='password' placeholder='Your Password' />
+                                                <FaEye onClick={() => setShowPassword(!showPassword)} className='password-eye' />
+                                            </div>
+                                            <button type='submit' className="btn btn-primary w-100 login-btn">
+                                                Login
+                                                <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M3.625 10H17.375" stroke="#191C1F" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path>
+                                                    <path d="M11.75 4.375L17.375 10L11.75 15.625" stroke="#191C1F" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path>
+                                                </svg>
+                                            </button>
+                                        </form>
+                                        <div className="form-bottom">
+                                            <div className='bottom-text'>
+                                                <p className="text">Don't have an account?</p>
+                                            </div>
+                                            <a href='/signup' className='btn btn-outline-primary w-100 create-account-btn'>
+                                                Create Account
+                                            </a>
+                                        </div>
                                     </div>
-                                </div>
+                                )}
                             </div>
                         </div> 
                     </div> 
