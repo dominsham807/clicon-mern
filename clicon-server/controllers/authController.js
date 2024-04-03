@@ -7,7 +7,7 @@ import UnauthenticatedError from "../errors/unauthenticated.js"
 import { StatusCodes } from "http-status-codes"
 import notFound from "../middlewares/not-found.js"
 import createUserToken from "../utils/createUserToken.js"
-import { attachCookiesToResponse } from "../utils/jwt.js"
+import { attachCookiesToResponse, generateToken } from "../utils/jwt.js"
 
 export const registerUser = async(req, res) => {
     try{
@@ -81,7 +81,7 @@ export const loginUser = async(req, res) => {
             throw new BadRequestError("Email and Password are all required") 
         }
     
-        const user = await User.findOne({ email })
+        const user = await User.findOne({ email }) 
         if(!user){
             throw new notFound("User not found")
         }
@@ -96,30 +96,41 @@ export const loginUser = async(req, res) => {
             throw new UnauthenticatedError("Please verify your email before login")
         }
 
-        const userToken = createUserToken(user) 
+        // const userToken = createUserToken(user) 
 
-        let refreshToken = ''
+        // let refreshToken = ''
  
-        const existingToken = await Token.findOne({ user: user._id })
-        if(existingToken){
-            const { isValid } = existingToken
-            if(!isValid){
-                throw new UnauthenticatedError("Invalid credentials")
-            }
-            refreshToken = existingToken.refreshToken
-        } else{
-            refreshToken = crypto.randomBytes(40).toString("hex") 
-            const userToken = { refreshToken, user: user._id }
+        // const existingToken = await Token.findOne({ user: user._id })
+        // if(existingToken){
+        //     const { isValid } = existingToken
+        //     if(!isValid){
+        //         throw new UnauthenticatedError("Invalid credentials")
+        //     }
+        //     refreshToken = existingToken.refreshToken
+        // } else{
+        //     refreshToken = crypto.randomBytes(40).toString("hex") 
+        //     const userToken = { refreshToken, user: user._id }
 
-            await Token.create(userToken)
-        }
+        //     await Token.create(userToken)
+        // }
 
-        const { accessTokenJwt, refreshTokenJwt } = attachCookiesToResponse({ res, user, refreshToken }) 
+        // const { accessTokenJwt, refreshTokenJwt } = attachCookiesToResponse({ res, user, refreshToken }) 
+        console.log(user._id)
+        const token = generateToken(user._id)
+        console.log(token)
 
         res.status(StatusCodes.OK).json({
             success: true,
             message: "Login Success",
-            user: userToken, accessTokenJwt, refreshTokenJwt
+            user: {
+                _id: user._id,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                username: user.username,
+                email: user.email,
+                role: user.role
+            }, 
+            token
         })
     } catch(error){
         res.status(500).send({

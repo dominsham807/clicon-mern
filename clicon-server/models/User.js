@@ -32,7 +32,10 @@ const userSchema = new mongoose.Schema({
     address: {
         type : String,
     },
-    image: {
+    country:{
+        type : String,
+    },
+    photo: {
         type: {},
     },
     password:{

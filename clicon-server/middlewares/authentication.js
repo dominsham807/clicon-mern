@@ -1,42 +1,27 @@
-import UnauthenticatedError from "../errors/unauthenticated.js"
-import Token from "../models/Token.js"
-import { attachCookiesToResponse, verifyToken } from "../utils/jwt.js"
+import jwt from "jsonwebtoken"
+import UnauthenticatedError from "../errors/unauthenticated.js" 
+import User from "../models/User.js"
 
-export const authenticateUser = async(req, res, next) => {
-    const refreshToken = req.signedCookies.refreshToken
-    const accessToken = req.signedCookies.accessToken
+export const authenticateUser = async(req, res, next) => {  
+    let token  
 
-    console.log(refreshToken)
-    console.log(accessToken)
-    
-    try{
-        if(accessToken){
-            const { payload } = verifyToken(accessToken)
-            req.user = { userId: payload.user._id, name: payload.user.name, role: payload.user.role }
+    if(req.headers.authorization){
+        try{
+            token = req.headers.authorization  
+
+            const decoded = jwt.verify(token, process.env.JWT_SECRET)
+      
+            req.user = await User.findById(decoded.id).select('-password')
+            console.log(req.user)
+
             next()
-            return 
+        } catch(error){
+            console.log(error)
+            throw new UnauthenticatedError('Invalid authentication')
         }
+    } 
 
-        const { payload } = verifyToken(refreshToken)
-
-        const existingToken = await Token.findOne({
-            user: payload.user._id,
-            refreshToken: payload.refreshToken 
-        })
-
-        if(!existingToken || !existingToken.isValid){
-            throw new UnauthenticatedError("Invalid authentication")
-        }
-
-        attachCookiesToResponse({
-            res,
-            user: payload.user,
-            refreshToken: existingToken.refreshToken 
-        })
-        
-        req.user = { userId: payload.user._id, name: payload.user.name, role: payload.user.role }
-        next()
-    } catch(error){
+    if(!token){
         throw new UnauthenticatedError('Invalid authentication')
     }
 }

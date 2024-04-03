@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { useDispatch } from "react-redux"
 import { BACKEND_URL } from '../constants'
 import { loginUser } from '../redux/reducers/userReducer.js'
+import { useAuth } from '../context/auth'
 import toast from 'react-hot-toast'
 import axios from 'axios'
 
@@ -15,6 +16,8 @@ const Signin = () => {
     const [password, setPassword] = useState("")
     const [showPassword, setShowPassword] = useState(false)
 
+    const [auth, setAuth] = useAuth()
+
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
@@ -24,16 +27,19 @@ const Signin = () => {
         try{
             const res = await axios.post(`${BACKEND_URL}/api/v1/auth/login`, {
                 email, password
-            }, {
-                withCredentials: true,
             })
             if(res?.data?.success){
+                toast.success(res.data.message)
+                setAuth({
+                    ...auth,
+                    user: res.data.user,
+                    token: res.data.token
+                })
                 dispatch(loginUser(res.data.user))
+                localStorage.setItem("auth", JSON.stringify(res.data))
                 toast.success(res.data.message)
                 navigate("/")
-            } else{
-                toast.error(res?.data?.message)
-            }
+            } 
         } catch(error){
             console.log(error)
             toast.error("Something went wrong")
