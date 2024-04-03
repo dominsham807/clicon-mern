@@ -21,13 +21,12 @@
     gap: 25px;
     padding: 24px;
 }
-.account-setting-main .profile{
-    display: inline-block;
+.account-setting-main .profile{ 
     min-width: 200px;
     max-width: 200px;
     min-height: 200px;
     max-height: 200px; 
-    position:relative; 
+    position: relative; 
 }
 .account-setting-main .profile img{   
     width: 100%; 

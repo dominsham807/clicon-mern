@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import "../styles/bestdeals.css"
 import { FaStar } from 'react-icons/fa6'
-import ProductModal from './ProductModal';
-import { products } from '../data/mockData.js';
+import ProductModal from './ProductModal'; 
+import axios from 'axios';
+import { BACKEND_URL } from '../constants';
+
+import "../styles/bestdeals.css"
 
 const BestDeals = () => {
     const getRestTime = (current) => {
@@ -23,15 +25,25 @@ const BestDeals = () => {
     const [time, setTime] = useState(getRestTime(new Date()));
     const [showModal, setShowModal] = useState(-1)
 
+    const [bestDealsProducts, setBestDealsProducts] = useState([])
+
+    const fetchBestDealsProducts = async() => {
+        const res = await axios.get(`${BACKEND_URL}/api/v1/product/bestdeals`)
+        setBestDealsProducts(res.data.products) 
+    }
+
+ 
     useEffect(() => {
+        fetchBestDealsProducts()  
+
         const timer = setInterval(() => {
             setTime(getRestTime(new Date()));
-        }, 1000);
-      
+        }, 1000)
+
         return () => {
             clearInterval(timer);
-        };
-    }, [])
+        }; 
+    }, [])  
 
     return (
         <div className='bestdeal-section'>
@@ -57,7 +69,7 @@ const BestDeals = () => {
                 <div className="bestdeal-section__product-area">
                     <div className="bestdeal-section__product-area-big">
                         <div className="product-big__card">
-                            <div className="card-image">
+                            <div className="card-image big">
                                 <img src="https://clicon-html.netlify.app/image/product/ps5.png" alt="" />
                             </div>
                             <div className="big-card-body">
@@ -114,13 +126,13 @@ const BestDeals = () => {
                         </div>
                     </div>
                     <div className="bestdeal-section__product-area-main">
-                        {products.slice(1,9).map((product, index) => (
+                        {bestDealsProducts.slice(1,9).map((product, index) => (
                             // {product.isBestDeal && (
                             <div key={index}>
                                 <ProductModal show={showModal} setShow={setShowModal} product={product} />
                                 <div className="product-card">
                                     <div className="card-image">
-                                        <img src={product.images[0]} alt="" />
+                                        <img src={product.image} alt="" />
                                         <div className="card-hover">
                                             <a href="#" className="hover-wishlist-btn">
                                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -147,7 +159,17 @@ const BestDeals = () => {
                                     </div>
                                     <div className="card-body">
                                         <h6 className='card-title'>{product.name}</h6>
-                                        <p className="card-price"><del>${product.originalPrice}</del>${product.price}</p>
+                                        <p className="card-price">
+                                            {product.discountedPrice ? (
+                                                <>
+                                                <del>${product.price}</del>${product.discountedPrice}
+                                                </>
+                                            ) : (
+                                                <>
+                                                ${product.price}
+                                                </> 
+                                            )} 
+                                        </p>
                                     </div>
                                 </div>
                             </div>

@@ -30,7 +30,7 @@ const Settings = () => {
     const getProfile = async() => {
         const res = await axios.get(`${BACKEND_URL}/api/v1/user/profile`) 
         console.log(res)
-        
+
         if(res.data.success){
             setFirstName(res.data?.user.firstName)
             setLastName(res.data?.user.lastName)
@@ -48,7 +48,7 @@ const Settings = () => {
     useEffect(() => {
         setPhotoPreview("/icon.png")
         getProfile()  
-    }, [firstName, lastName])
+    }, [])
 
     const handlePhotoChange = (e) => {
         const file = e.target.files[0]

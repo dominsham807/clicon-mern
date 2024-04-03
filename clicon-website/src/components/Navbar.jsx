@@ -334,7 +334,7 @@ const Navbar = () => {
                             </div>
                             <div className={`account-popup ${showAccount ? 'active' : ""}`}>
                                 <div className="popup-login-header">
-                                    {user ? <h6 className='title'>Welcome {user?.name}!</h6> : <h6 className="title">Login to your account</h6>}
+                                    {user ? <h6 className='title'>Welcome {user?.lastName}!</h6> : <h6 className="title">Login to your account</h6>}
                                 </div>
                                 {user ? (
                                     <div className="popup-window">  

@@ -1,9 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react' 
-import { Swiper, SwiperSlide } from 'swiper/react'
-import 'swiper/css'
-import 'swiper/css/pagination'
-import 'swiper/css/navigation'
-import { Navigation } from 'swiper/modules'; 
+import React, { useEffect, useRef, useState } from 'react'  
 import { FaFacebook, FaAngleDown, FaStar, FaInstagram, FaPinterest } from 'react-icons/fa'
 import { BsCopy } from "react-icons/bs"
 import { CiHeart } from 'react-icons/ci'
@@ -11,7 +6,7 @@ import { CiHeart } from 'react-icons/ci'
 import "../styles/product-details.css"
 
 const ProductDetails = ({product}) => {
-    const { name, sku, images, brand, price, originalPrice, availability, ratings, category, promotion } = product 
+    const { name, sku, image, brand, price, discountedPrice, availability, ratings, category, promotion, discountPercentage } = product 
     
     const [color, setColor] = useState("")
     const [showSizeBox, setShowSizeBox] = useState(false)
@@ -96,7 +91,7 @@ const ProductDetails = ({product}) => {
             <div className="col-xxl-6 ">
                 <div className="slider-area">
                     <div className="single-big-image">
-                        <img src={images[0]} alt="" draggable={false} />
+                        <img src={image} alt="" draggable={false} />
                     </div> 
                     {/* <div className="slider-images">
                         <Swiper  
@@ -172,23 +167,31 @@ const ProductDetails = ({product}) => {
                             <li>Sku: <span>{sku}</span></li>      
                             <li>Availability: 
                                 {availability.inStock ? (
-                                    <span className='stock'>In Stock</span>
+                                    <span className='stock'> In Stock</span>
                                 ) : (
-                                    <span className='stock unavailable'>Out of Stock</span>
+                                    <span className='stock unavailable'> Out of Stock</span>
                                 )}
                                 {/* <span className='stock'>In Stock</span> */}
                             </li>      
                             <li>Brand: <span>{brand}</span></li>     
-                            <li>Category: <span>{category}</span></li>     
+                            <li>Category: <span>{category.charAt(0).toUpperCase() + category.slice(1)}</span></li>     
                         </ul>
                     </div>
                     <div className="slider-content-price">
                         <div className="price">
-                            <span>${price}</span>
-                            <del>${originalPrice}</del>
+                            {discountedPrice ? (
+                                <>
+                                <span>${price}</span>
+                                <del>${discountedPrice}</del></>
+                            ) : (
+                                <>
+                                <span>${price}</span>
+                                </>
+                            )}
+                         
                         </div>
                         <div className="offer-badge">
-                            {promotion.discountPercentage}% OFF 
+                            {discountPercentage}% OFF 
                         </div>
                     </div>
                     <div className="slider-content-form">
