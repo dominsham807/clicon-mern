@@ -1,4 +1,5 @@
 import express from "express"
+import chalk from "chalk"
 import bodyParser from 'body-parser'
 import cors from "cors"
 import morgan from "morgan"
@@ -18,8 +19,9 @@ const app = express()
 app.use(cors())
 
 app.use(morgan('dev'))
+
+app.use(express.urlencoded({ extended: true })) 
 app.use(express.json())
-app.use(express.urlencoded({ extended: false })) 
 
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true, parameterLimit: 50000 }))
@@ -39,5 +41,7 @@ const port = process.env.PORT || 4000
 
 app.listen(port, () => {
     connectDB()
-    console.log(`Server running on port ${port}`)
+    console.log(  `${chalk.green('✓')} ${chalk.blue(
+        `Listening on port ${port}. Visit http://localhost:${port}/ in your browser.`
+    )}`)
 })

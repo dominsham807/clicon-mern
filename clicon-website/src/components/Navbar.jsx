@@ -6,16 +6,20 @@ import { IoCall } from "react-icons/io5"
 import { IoMdMenu } from "react-icons/io";
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import { useAuth } from '../context/auth'
+import toast from 'react-hot-toast'
+import { logoutUser } from '../redux/reducers/userReducer.js'
 import Logo from "/logo.png" 
 
 import "../styles/navbar.css"
-
 
 const Navbar = () => { 
     const location = useLocation() 
 
     const { user } = useSelector((state) => state.userReducer)
     console.log(user)
+
+    const [auth, setAuth] = useAuth()
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -37,6 +41,18 @@ const Navbar = () => {
     const [showAccount, setShowAccount] = useState(false)
 
     const [showPassword, setShowPassword] = useState(false)
+
+    const handleLogout = () => {
+        setAuth({
+            ...auth,
+            user: null,
+            token: ""
+        })
+        localStorage.removeItem("auth")
+        dispatch(logoutUser())
+        navigate("/")
+        toast.success("Logout success")
+    }
  
     let languageRef = useRef()
     let currencyRef = useRef()
@@ -341,7 +357,7 @@ const Navbar = () => {
                                         <a href='/settings' className="btn btn-primary w-100">
                                             Settings
                                         </a>
-                                        <button className="btn btn-primary w-100">
+                                        <button className="btn btn-primary w-100" onClick={handleLogout}>
                                             Logout
                                         </button> 
                                     </div> 

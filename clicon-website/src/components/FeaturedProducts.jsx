@@ -3,13 +3,15 @@ import { FaArrowRight, FaStar } from 'react-icons/fa6'
 import axios from 'axios'
 import { BACKEND_URL } from '../constants'
 
-import "../styles/featured_products.css"
+import "../styles/featured_products.css" 
 
-const FeaturedProducts = () => {
+const FeaturedProducts = ({ setShowModal, setSelectedProduct }) => {
     const [selectedActiveTab, setSelectedActiveTab] = useState("all")
     const [selectedShowTab, setSelectedShowTab] = useState("all") 
 
-    const [featuredProducts, setFeaturedProducts] = useState([])
+    const [featuredProducts, setFeaturedProducts] = useState([]) 
+    // const [showModal, setShowModal] = useState(-1)
+
     const TRANSITION_DURATION = 150
 
     const fetchFeaturedProducts = async() => {
@@ -98,9 +100,10 @@ const FeaturedProducts = () => {
                             <div className="product-section_1-wrapper-tab_content">
                                 <div className="tab-content">
                                     <div className={`tab-pane fade ${selectedActiveTab === "all" ? "active" : ""} ${selectedShowTab === "all" ? "show" : ""}`}>
-                                        <div className="product-section_1-wrapper-all_products">
+                                        <div className="product-section_1-wrapper-all_products"> 
+                                            {/* <ProductModal show={showModal} setShow={setShowModal} product={selectedProduct} /> */}
                                             {featuredProducts && featuredProducts.map((product, index) => (
-                                                <div className="product-card featured" key={index}>
+                                                <div className="product-card featured" key={index}> 
                                                     <div className="card-image">
                                                         <img src={product.image} alt="" />
                                                         <div className="card-hover">
@@ -116,7 +119,11 @@ const FeaturedProducts = () => {
                                                                     <path d="M3.96562 6.75H20.7844L18.3094 15.4125C18.2211 15.7269 18.032 16.0036 17.7711 16.2C17.5103 16.3965 17.1922 16.5019 16.8656 16.5H7.88437C7.55783 16.5019 7.2397 16.3965 6.97886 16.2C6.71803 16.0036 6.52893 15.7269 6.44062 15.4125L3.04688 3.54375C3.00203 3.38696 2.9073 3.24905 2.77704 3.15093C2.64677 3.05282 2.48808 2.99983 2.325 3H0.75" stroke="#191C1F" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path>
                                                                 </svg>
                                                             </a>
-                                                            <a href="#" className="hover-view-btn">
+                                                            <a href="#" className="hover-view-btn" onClick={(e) => {
+                                                                e.preventDefault()
+                                                                setShowModal(true)
+                                                                setSelectedProduct(product)
+                                                            }}>
                                                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                                     <path d="M12 4.25C4.5 4.25 1.5 12 1.5 12C1.5 12 4.5 19.75 12 19.75C19.5 19.75 22.5 12 22.5 12C22.5 12 19.5 4.25 12 4.25Z" stroke="#191C1F" strokelinewidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path>
                                                                     <path d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z" stroke="#191C1F" strokelinewidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path>
@@ -475,7 +482,7 @@ const FeaturedProducts = () => {
                                             </div>
                                         </div>
                                     </div> 
-                                    <div className={`tab-pane fade ${selectedActiveTab === "laptop" ? "active" : ""} ${selectedShowTab === "smartphones" ? "show" : ""}`}>
+                                    <div className={`tab-pane fade ${selectedActiveTab === "laptop" ? "active" : ""} ${selectedShowTab === "laptop" ? "show" : ""}`}>
                                         <div className="product-section_1-wrapper-all_products">
                                             <div className="product-card featured">
                                                 <div className="card-image">

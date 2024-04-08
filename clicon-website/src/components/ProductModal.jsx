@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react' 
 import ProductDetails from './ProductDetails'
 
-const ProductModal = ({ show, setShow, product }) => {  
+const ProductModal = ({ show, setShow, selectedProduct }) => {  
     const modalRef = useRef()
 
     useEffect(() => { 
@@ -12,7 +12,7 @@ const ProductModal = ({ show, setShow, product }) => {
         }
     
         const setOverflowHidden = () => {
-            if(show === product.id){
+            if(show){
                 document.body.style.overflowY = "hidden" 
             } else{
                 document.body.style.overflowY = "scroll"
@@ -28,11 +28,11 @@ const ProductModal = ({ show, setShow, product }) => {
     }, [show])
 
     return (
-        <div className={`modal fade ${show === product.id ? "show" : ""}`} tabIndex={-1} aria-modal="true" role='dialog'>
+        <div className={`modal fade ${show ? "show" : ""}`} tabIndex={-1} aria-modal="true" role='dialog'>
             <div className="modal-dialog modal-dialog-centered modal-xl">
                 <div className="modal-content">
                     <div className="product-modal-slider"> 
-                        <ProductDetails product={product} />
+                        <ProductDetails selectedProduct={selectedProduct} />
                     </div>
                 </div>
             </div>

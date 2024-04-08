@@ -5,34 +5,24 @@ import { CiHeart } from 'react-icons/ci'
 
 import "../styles/product-details.css"
 
-const ProductDetails = ({product}) => {
-    const { name, sku, image, brand, price, discountedPrice, availability, ratings, category, promotion, discountPercentage } = product 
+const ProductDetails = ({selectedProduct}) => {
+    const { name, sku, image, brand, price, discountedPrice, availability, ratings, category, promotion, discountPercentage } = selectedProduct 
     
-    const [color, setColor] = useState("")
     const [showSizeBox, setShowSizeBox] = useState(false)
     const [showMemoryBox, setShowMemoryBox] = useState(false)
-    const [showStorageBox, setShowStorageBox] = useState(false)
+    const [showStorageBox, setShowStorageBox] = useState(false) 
 
-    let sizes = ['XL', 'Large', 'Medium', 'Small']
-    let memories = ['16GB', '32GB', '64GB']
-    let storages = ['1TV SSD', '2TV SSD', '4TV SSD']
+    const sizes = ['XL', 'Large', 'Medium', 'Small']
+    const memories = ['16GB', '32GB', '64GB']
+    const storages = ['1TV SSD', '2TV SSD', '4TV SSD']
 
+    const [color, setColor] = useState("")
     const [selectedSize, setSelectedSize] = useState(sizes[0])
     const [selectedMemory, setSelectedMemory] = useState(memories[0])
-    const [selectedStorage, setSelectedStorage] = useState(storages[0])
-
-    // const imageSlidesShow = [
-    //     "https://clicon-html.netlify.app/image/product/gallery/01.png",
-    //     "https://clicon-html.netlify.app/image/product/gallery/02.png",
-    //     "https://clicon-html.netlify.app/image/product/gallery/03.png",
-    //     "https://clicon-html.netlify.app/image/product/gallery/04.png",
-    //     "https://clicon-html.netlify.app/image/product/gallery/05.png",
-    //     "https://clicon-html.netlify.app/image/product/gallery/06.png",
-    //     "https://clicon-html.netlify.app/image/product/gallery/03.png",
-    //     "https://clicon-html.netlify.app/image/product/gallery/02.png"
-    // ]
-
-    // const [selectedImage, setSelectedImage] = useState(imageSlidesShow[0])
+    const [selectedStorage, setSelectedStorage] = useState(storages[0])  
+ 
+    console.log(color)
+    console.log(selectedSize)
 
     const [productQty, setProductQty] = useState(1)
 
@@ -166,7 +156,7 @@ const ProductDetails = ({product}) => {
                         <ul>
                             <li>Sku: <span>{sku}</span></li>      
                             <li>Availability: 
-                                {availability.inStock ? (
+                                {availability ? (
                                     <span className='stock'> In Stock</span>
                                 ) : (
                                     <span className='stock unavailable'> Out of Stock</span>
@@ -174,7 +164,7 @@ const ProductDetails = ({product}) => {
                                 {/* <span className='stock'>In Stock</span> */}
                             </li>      
                             <li>Brand: <span>{brand}</span></li>     
-                            <li>Category: <span>{category.charAt(0).toUpperCase() + category.slice(1)}</span></li>     
+                            <li>Category: <span>{category?.charAt(0).toUpperCase() + category?.slice(1)}</span></li>     
                         </ul>
                     </div>
                     <div className="slider-content-price">
@@ -187,12 +177,15 @@ const ProductDetails = ({product}) => {
                                 <>
                                 <span>${price}</span>
                                 </>
-                            )}
-                         
+                            )} 
                         </div>
-                        <div className="offer-badge">
-                            {discountPercentage}% OFF 
-                        </div>
+                        {discountPercentage ? (
+                            <div className="offer-badge">
+                                {discountPercentage}% OFF 
+                            </div>
+                        ) : (
+                            <></>
+                        )} 
                     </div>
                     <div className="slider-content-form">
                         <div className="slider-content-form-color">
@@ -218,7 +211,8 @@ const ProductDetails = ({product}) => {
                                         <li 
                                             key={index}
                                             className={`option ${selectedSize === size ? "selected" : ""}`}
-                                            onClick={() => {
+                                            onClick={(e) => {
+                                                e.stopPropagation()
                                                 setSelectedSize(size)
                                                 setShowSizeBox(false)
                                             }}
@@ -241,7 +235,8 @@ const ProductDetails = ({product}) => {
                                         <li 
                                             key={index}
                                             className={`option ${selectedMemory === memory ? "selected" : ""}`}
-                                            onClick={() => {
+                                            onClick={(e) => {
+                                                e.stopPropagation()
                                                 setSelectedMemory(memory)
                                                 setShowMemoryBox(false)
                                             }}
