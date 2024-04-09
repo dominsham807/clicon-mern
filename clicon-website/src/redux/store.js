@@ -5,9 +5,11 @@ import {
     persistStore 
 } from 'redux-persist'
 import { userReducer } from "./reducers/userReducer.js"
+import { cartReducer } from "./reducers/cartReducer.js"
 
 const reducers = combineReducers({
-    [userReducer.name]: userReducer.reducer
+    [userReducer.name]: userReducer.reducer,
+    [cartReducer.name]: cartReducer.reducer
 })
 
 const persistConfig = {

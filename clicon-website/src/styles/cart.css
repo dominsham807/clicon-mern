@@ -148,7 +148,9 @@
 .grandtotal-amount{
     font-weight: 800;
 }
-.checkout-btn{
+.checkout-cart-btn{
+    display: inline-flex;
+    gap: 10px;
     margin-top: 24px;
 }
 

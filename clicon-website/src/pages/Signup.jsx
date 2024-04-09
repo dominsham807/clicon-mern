@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from "axios"
 import BreadCrumb from '../components/BreadCrumb'
 import { FaArrowRight, FaEye } from 'react-icons/fa'
@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast'
 
 import "../styles/account.css"
+import { useSelector } from 'react-redux'
 
 const Signup = () => {
     const [showPassword, setShowPassword] = useState(false)
@@ -23,7 +24,15 @@ const Signup = () => {
    
     const [errorMessage, setErrorMessage] = useState("")
 
+    const { user } = useSelector((state) => state.userReducer)
+
     const navigate = useNavigate()
+
+    useEffect(() => {
+        if(user){
+            navigate("/")
+        }
+    }, [user])
 
     const handleSignup = async(e) => {
         e.preventDefault()

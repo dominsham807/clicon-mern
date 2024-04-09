@@ -6,23 +6,32 @@ import { IoCall } from "react-icons/io5"
 import { IoMdMenu } from "react-icons/io";
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { useAuth } from '../context/auth'
+import axios from 'axios'
 import toast from 'react-hot-toast'
-import { logoutUser } from '../redux/reducers/userReducer.js'
+import { useAuth } from '../context/auth'
+import { loginUser, logoutUser } from '../redux/reducers/userReducer.js'
+import { calculatePrice } from '../redux/reducers/cartReducer.js'
 import Logo from "/logo.png" 
+import { BACKEND_URL } from '../constants'
 
 import "../styles/navbar.css"
+
 
 const Navbar = () => { 
     const location = useLocation() 
 
     const { user } = useSelector((state) => state.userReducer)
-    console.log(user)
+    const { cartItems, quantity, subtotal, totalPrice, shippingCharge, discountPercentage } = useSelector((state) => state.cartReducer)
+    console.log(subtotal)
+    console.log(totalPrice)
 
     const [auth, setAuth] = useAuth()
 
     const dispatch = useDispatch()
-    const navigate = useNavigate()
+    const navigate = useNavigate() 
+    
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
 
     const [languageOpen, setLanguageOpen] = useState(false)
     const [currencyOpen, setCurrencyOpen] = useState(false)
@@ -38,9 +47,33 @@ const Navbar = () => {
 
     const [showCart, setShowCart] = useState(false)
     const [showWishlist, setShowWishlist] = useState(false)
-    const [showAccount, setShowAccount] = useState(false)
+    const [showAccount, setShowAccount] = useState(false) 
+    const [showPassword, setShowPassword] = useState(false) 
 
-    const [showPassword, setShowPassword] = useState(false)
+    const handleSignin = async(e) => {
+        e.preventDefault()
+
+        try{
+            const res = await axios.post(`${BACKEND_URL}/api/v1/auth/login`, {
+                email, password
+            })
+            if(res?.data?.success){ 
+                setAuth({
+                    ...auth,
+                    user: res.data.user,
+                    token: res.data.token
+                })
+                dispatch(loginUser(res.data.user))
+                localStorage.setItem("auth", JSON.stringify(res.data))
+                window.location.reload();
+                toast.success(res.data.message)
+                navigate("/")
+            } 
+        } catch(error){
+            console.log(error)
+            toast.error("Something went wrong")
+        }
+    }
 
     const handleLogout = () => {
         setAuth({
@@ -50,6 +83,7 @@ const Navbar = () => {
         })
         localStorage.removeItem("auth")
         dispatch(logoutUser())
+        window.location.reload();
         navigate("/")
         toast.success("Logout success")
     }
@@ -219,49 +253,41 @@ const Navbar = () => {
                             </div>
                             <div className={`cart-popup ${showCart ? 'active' : ""}`}>
                                 <div className="popup-header">
-                                    <h6 className="title">Shopping Cart <span>(02)</span></h6>
+                                    <h6 className="title">Shopping Cart <span>({cartItems?.length})</span></h6>
                                 </div>
                                 <div className="popup-body"> 
-                                    <div className="cart-single">
-                                        <div className="cart-image">
-                                            <img src="https://clicon-html.netlify.app/image/product/product-43.png" alt="" />
-                                        </div>
-                                        <div className="cart-item">
-                                            <p className="cart-product-name">Canon EOS 1500D DSLR Camera Body+ 18-55 mm</p>
-                                            <div className="cart-price">
-                                                <span className="count">1 x</span>
-                                                <span className="price">$1,500</span>
+                                    {cartItems.map((item, index) => (
+                                        <div className="cart-single" key={index}>
+                                            <div className="cart-image">
+                                                <img src={item.image} alt="" />
+                                            </div>
+                                            <div className="cart-item">
+                                                <p className="cart-product-name">{item.name}</p>
+                                                <div className="cart-price">
+                                                    <span className="count">{item.quantity} x</span>
+                                                    <span className="price">${item.price}</span>
+                                                </div> 
                                             </div> 
+                                            <div className="cart-delete">
+                                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M12.5 3.5L3.5 12.5" stroke="#929FA5" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path>
+                                                    <path d="M12.5 12.5L3.5 3.5" stroke="#929FA5" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path>
+                                                </svg>
+                                            </div>
                                         </div> 
-                                        <div className="cart-delete">
-                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M12.5 3.5L3.5 12.5" stroke="#929FA5" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path>
-                                                <path d="M12.5 12.5L3.5 3.5" stroke="#929FA5" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path>
-                                            </svg>
-                                        </div>
-                                    </div> 
-                                    <div className="cart-single">
-                                        <div className="cart-image">
-                                            <img src="https://clicon-html.netlify.app/image/product/product-43.png" alt="" />
-                                        </div>
-                                        <div className="cart-item">
-                                            <p className="cart-product-name">Canon EOS 1500D DSLR Camera Body+ 18-55 mm</p>
-                                            <div className="cart-price">
-                                                <span className="count">1 x</span>
-                                                <span className="price">$1,500</span>
-                                            </div> 
-                                        </div> 
-                                        <div className="cart-delete">
-                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M12.5 3.5L3.5 12.5" stroke="#929FA5" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path>
-                                                <path d="M12.5 12.5L3.5 3.5" stroke="#929FA5" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path>
-                                            </svg>
-                                        </div>
-                                    </div> 
+                                    ))}  
                                 </div>
                                 <div className="popup-subtotal">
                                     <div className="subtotal-text">Subtotal</div>
-                                    <div className="subtotal-price">HKD $2,038.00</div>
+                                    <div className="subtotal-price">HKD ${subtotal}</div>
+                                </div>
+                                <div className="popup-subtotal">
+                                    <div className="subtotal-text">Shipping Charge</div>
+                                    <div className="subtotal-price">HKD ${shippingCharge}</div>
+                                </div>
+                                <div className="popup-subtotal">
+                                    <div className="subtotal-text">Total Price</div>
+                                    <div className="subtotal-price">HKD ${totalPrice}</div>
                                 </div>
                                 <div className="cart-button-group">
                                     <button type='submit' className="checkout-btn">
@@ -363,14 +389,14 @@ const Navbar = () => {
                                     </div> 
                                 ):(
                                     <div className="popup-form">
-                                        <form>
+                                        <form onSubmit={handleSignin}>
                                             <div className="form-group">
                                                 <label htmlFor="email" className='form-email'>Email Address</label>
-                                                <input type="email" className='form-control' id='email' placeholder='example@gmail.com' />
+                                                <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className='form-control' id='email' placeholder='example@gmail.com' />
                                             </div>
                                             <div className="form-group password">
                                                 <label htmlFor="password" className='form-password'>Password</label>
-                                                <input type={showPassword ? "text" : "password"} className='form-control password' id='password' placeholder='Your Password' />
+                                                <input type={showPassword ? "text" : "password"} value={password} onChange={(e) => setPassword(e.target.value)} className='form-control password' id='password' placeholder='Your Password' />
                                                 <FaEye onClick={() => setShowPassword(!showPassword)} className='password-eye' />
                                             </div>
                                             <button type='submit' className="btn btn-primary w-100 login-btn">

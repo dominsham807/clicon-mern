@@ -1,10 +1,13 @@
 import React, { useState } from 'react'
 import BreadCrumb from '../components/BreadCrumb'
+import { useSelector } from 'react-redux'
 import { cart } from '../data/mockData.js'
 
 import "../styles/cart.css"
 
 const Cart = () => {
+    const { cartItems, quantity, subtotal, totalPrice, shippingCharge, discountPercentage } = useSelector((state) => state.cartReducer)
+    
     return (
         <>
         <BreadCrumb mainSection={"Shopping Cart"} />
@@ -25,7 +28,7 @@ const Cart = () => {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {cart[0].items.map((item, index) => {
+                                        {cartItems.map((item, index) => {
                                             const [productQty, setProductQty] = useState(item.quantity)
 
                                             const handleIncreaseQty = () => { 
@@ -56,13 +59,12 @@ const Cart = () => {
                                                                     <path d="M15 15L9 9" stroke="#929FA5" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path>
                                                                 </svg>
                                                             </button>
-                                                            <img src={item.images[0]} alt="" />
-                                                            <span className="product-text">{item.productName}</span>
+                                                            <img src={item.image} alt="" />
+                                                            <span className="product-text">{item.name}</span>
                                                         </span>
                                                     </td>
                                                     <td className='cart-price'>
-                                                        <del>${item.originalPrice}</del>
-                                                        ${item.price}
+                                                        ${item.price} 
                                                     </td>
                                                     <td className='cart-quantity'>
                                                         <div className="product-quantity-count">
@@ -127,7 +129,7 @@ const Cart = () => {
                                     <span className="grandtotal-amount">HKD ${cart[0].totalPrice}</span>  
                                 </li>
                             </ul>
-                            <button className="btn btn-primary w-100 checkout-btn">
+                            <button className="btn btn-primary w-100 checkout-cart-btn">
                                 Proceed to Checkout
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M3.75 12H20.25" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path>

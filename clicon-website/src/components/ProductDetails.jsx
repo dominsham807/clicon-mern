@@ -2,12 +2,19 @@ import React, { useEffect, useRef, useState } from 'react'
 import { FaFacebook, FaAngleDown, FaStar, FaInstagram, FaPinterest } from 'react-icons/fa'
 import { BsCopy } from "react-icons/bs"
 import { CiHeart } from 'react-icons/ci'
+import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { addToCart, calculatePrice } from '../redux/reducers/cartReducer.js'
 
 import "../styles/product-details.css"
+import toast from 'react-hot-toast'
 
 const ProductDetails = ({selectedProduct}) => {
     const { name, sku, image, brand, price, discountedPrice, availability, ratings, category, promotion, discountPercentage } = selectedProduct 
     
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+
     const [showSizeBox, setShowSizeBox] = useState(false)
     const [showMemoryBox, setShowMemoryBox] = useState(false)
     const [showStorageBox, setShowStorageBox] = useState(false) 
@@ -64,6 +71,26 @@ const ProductDetails = ({selectedProduct}) => {
         setProductQty(e.target.value)
     }
 
+    const handleAddToCart = (e) => {
+        e.preventDefault()
+
+        dispatch(addToCart({
+            name: name,
+            image: image,
+            sku: sku,
+            image: image,
+            quantity: productQty,
+            price: discountedPrice ? discountedPrice : price, 
+            discountPercentage: discountPercentage,
+            color: color,
+            size: selectedSize,
+            memory: selectedMemory,
+            storage: selectedStorage,
+        }))
+        dispatch(calculatePrice())
+        toast.success("Product added to cart successfully")
+    }
+
     useEffect(() => {  
         document.addEventListener("click", sizeHandler)  
         document.addEventListener("click", memoryHandler)  
@@ -82,51 +109,7 @@ const ProductDetails = ({selectedProduct}) => {
                 <div className="slider-area">
                     <div className="single-big-image">
                         <img src={image} alt="" draggable={false} />
-                    </div> 
-                    {/* <div className="slider-images">
-                        <Swiper  
-                            modules={[Navigation]}  
-                            spaceBetween={25}
-                            slidesPerView={1}
-                            navigation={{
-                                nextEl: '.image-swiper-button-next',
-                                prevEl: '.image-swiper-button-prev',
-                            }}
-                            breakpoints={{ 
-                                991:{
-                                    slidesPerView: 5
-                                },
-                                768: {
-                                    slidesPerView: 6
-                                },
-                                0: {
-                                    slidesPerView: 6
-                                } 
-                            }}
-                            loop
-                            autoplay={{
-                                stopOnLastSlide: false
-                            }}
-                        >
-                            {imageSlidesShow.map((slide, index) => (
-                                <SwiperSlide className={`single-slide-image ${selectedImage === slide ? "active" : ""}`} onClick={() => setSelectedImage(slide)} key={index}>
-                                    <img src={slide} alt="Single Slide" />
-                                </SwiperSlide>
-                            ))} 
-                        </Swiper>
-                        <button className="slick-arrow-carousel image-carousel button-prev image-swiper-button-prev" >
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M20.25 12H3.75" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path>
-                                <path d="M10.5 5.25L3.75 12L10.5 18.75" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path>
-                            </svg>
-                        </button>
-                        <button className="slick-arrow-carousel image-carousel button-next image-swiper-button-next" >
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M3.75 12H20.25" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path>
-                                <path d="M13.5 5.25L20.25 12L13.5 18.75" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path>
-                            </svg>
-                        </button>
-                    </div>  */}
+                    </div>  
                 </div>
             </div>
             <div className="col-xxl-6 ">
@@ -171,8 +154,8 @@ const ProductDetails = ({selectedProduct}) => {
                         <div className="price">
                             {discountedPrice ? (
                                 <>
-                                <span>${price}</span>
-                                <del>${discountedPrice}</del></>
+                                <span>${discountedPrice}</span>
+                                <del>${price}</del></>
                             ) : (
                                 <>
                                 <span>${price}</span>
@@ -259,7 +242,8 @@ const ProductDetails = ({selectedProduct}) => {
                                         <li 
                                             key={index}
                                             className={`option ${selectedStorage === storage ? "selected" : ""}`}
-                                            onClick={() => {
+                                            onClick={(e) => {
+                                                e.stopPropagation()
                                                 setSelectedStorage(storage)
                                                 setShowStorageBox(false)
                                             }}
@@ -287,7 +271,7 @@ const ProductDetails = ({selectedProduct}) => {
                             </button>
                         </div>
                         <div className="product-add-button">
-                            <a href="#" className="btn btn-primary">
+                            <a href="#" className="btn btn-primary" onClick={handleAddToCart}>
                                 Add To Cart
                                 <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M8.75 20.25C8.75 20.6642 8.41421 21 8 21C7.58579 21 7.25 20.6642 7.25 20.25C7.25 19.8358 7.58579 19.5 8 19.5C8.41421 19.5 8.75 19.8358 8.75 20.25Z" fill="white" stroke="white" strokeWidth="1.5"></path>

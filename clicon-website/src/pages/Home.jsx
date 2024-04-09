@@ -37,8 +37,8 @@ const Home = () => {
         <Features/>
         <BestDeals setShowModal={setShowModal} setSelectedProduct={setSelectedProduct} />
         <CategorySlider />
-        <FeaturedProducts showModal={showModal} setShowModal={setShowModal} />
-        <ProductModal setShow={setShowModal} selectedProduct={selectedProduct} />
+        <FeaturedProducts setShowModal={setShowModal} setSelectedProduct={setSelectedProduct} />
+        <ProductModal show={showModal} setShow={setShowModal} selectedProduct={selectedProduct} />
         </>
     )  
 }

@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FaArrowRight, FaEye } from 'react-icons/fa'
 import BreadCrumb from '../components/BreadCrumb'
 import { useNavigate } from 'react-router-dom'
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { BACKEND_URL } from '../constants'
 import { loginUser } from '../redux/reducers/userReducer.js'
 import { useAuth } from '../context/auth'
@@ -18,8 +18,16 @@ const Signin = () => {
 
     const [auth, setAuth] = useAuth()
 
+    const { user } = useSelector((state) => state.userReducer)
+
     const dispatch = useDispatch()
     const navigate = useNavigate()
+
+    useEffect(() => {
+        if(user){
+            navigate("/")
+        }
+    }, [user])
 
     const handleSignin = async(e) => {
         e.preventDefault()
@@ -28,8 +36,7 @@ const Signin = () => {
             const res = await axios.post(`${BACKEND_URL}/api/v1/auth/login`, {
                 email, password
             })
-            if(res?.data?.success){
-                toast.success(res.data.message)
+            if(res?.data?.success){ 
                 setAuth({
                     ...auth,
                     user: res.data.user,
@@ -37,6 +44,7 @@ const Signin = () => {
                 })
                 dispatch(loginUser(res.data.user))
                 localStorage.setItem("auth", JSON.stringify(res.data))
+                window.location.reload()
                 toast.success(res.data.message)
                 navigate("/")
             } 
