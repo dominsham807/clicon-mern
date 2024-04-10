@@ -51,10 +51,14 @@
     padding: 24px;
     padding-bottom: 16px;
 }
-.shopping-cart-body table tbody td .product-wrapper .close-btn{
+.close-btn{
     background: transparent;
     border: 0;
     padding: 0;
+}
+.shopping-cart-body table tbody td .product-wrapper img{
+    width: 100px;
+    object-fit: contain;
 }
 .shopping-cart-body table tbody td.cart-price,
 .shopping-cart-body table tbody td.cart-quantity,
@@ -107,12 +111,18 @@
     margin-bottom: 20px;
 }
 
-.total-title{ 
+.cart-total{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 20px;
+}
+.total-title, .total-qty{ 
     font-weight: 700;
     font-size: 18px;
     line-height: 24px;
     color: var(--bs-gray-900);
-    padding-bottom: 20px;
+    /* padding-bottom: 20px; */
 }
 .subtotal-list{
     display: flex;

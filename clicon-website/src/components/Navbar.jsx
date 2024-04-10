@@ -21,7 +21,7 @@ const Navbar = () => {
     const location = useLocation() 
 
     const { user } = useSelector((state) => state.userReducer)
-    const { cartItems, quantity, subtotal, totalPrice, shippingCharge, discountPercentage } = useSelector((state) => state.cartReducer)
+    const { cartItems, quantity, subtotal, totalPrice, shippingCharge } = useSelector((state) => state.cartReducer)
     console.log(subtotal)
     console.log(totalPrice)
 
@@ -278,6 +278,10 @@ const Navbar = () => {
                                     ))}  
                                 </div>
                                 <div className="popup-subtotal">
+                                    <div className="subtotal-text">Total No. of Items</div>
+                                    <div className="subtotal-price">{quantity}</div>
+                                </div>
+                                <div className="popup-subtotal">
                                     <div className="subtotal-text">Subtotal</div>
                                     <div className="subtotal-price">HKD ${subtotal}</div>
                                 </div>
@@ -289,15 +293,15 @@ const Navbar = () => {
                                     <div className="subtotal-text">Total Price</div>
                                     <div className="subtotal-price">HKD ${totalPrice}</div>
                                 </div>
-                                <div className="cart-button-group">
-                                    <button type='submit' className="checkout-btn">
+                                <div className="cart-button-group" href="/checkout">
+                                    <a type='submit' className="checkout-btn">
                                         Checkout 
                                         <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M3.625 10H17.375" stroke="#191C1F" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path>
                                             <path d="M11.75 4.375L17.375 10L11.75 15.625" stroke="#191C1F" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path>
                                         </svg>
-                                    </button>
-                                    <a className="view-cart-btn">
+                                    </a>
+                                    <a className="view-cart-btn" href="/cart">
                                         View Cart
                                     </a>
                                 </div>

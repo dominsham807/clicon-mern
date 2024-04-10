@@ -9,9 +9,10 @@ import { addToCart, calculatePrice } from '../redux/reducers/cartReducer.js'
 import "../styles/product-details.css"
 import toast from 'react-hot-toast'
 
-const ProductDetails = ({selectedProduct}) => {
-    const { name, sku, image, brand, price, discountedPrice, availability, ratings, category, promotion, discountPercentage } = selectedProduct 
-    
+const ProductDetails = ({ selectedProduct }) => {
+    const { id, name, sku, image, brand, price, discountedPrice, availability, ratings, category, promotion, discountPercentage } = selectedProduct 
+    console.log(id)
+
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
@@ -75,6 +76,7 @@ const ProductDetails = ({selectedProduct}) => {
         e.preventDefault()
 
         dispatch(addToCart({
+            id: id,
             name: name,
             image: image,
             sku: sku,

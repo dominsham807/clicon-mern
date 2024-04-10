@@ -1,13 +1,24 @@
 import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import toast from 'react-hot-toast'
 import BreadCrumb from '../components/BreadCrumb'
-import { useSelector } from 'react-redux'
-import { cart } from '../data/mockData.js'
+import { calculatePrice, updateCart } from '../redux/reducers/cartReducer.js'
 
 import "../styles/cart.css"
 
 const Cart = () => {
-    const { cartItems, quantity, subtotal, totalPrice, shippingCharge, discountPercentage } = useSelector((state) => state.cartReducer)
-    
+    const { cartItems, quantity, subtotal, totalPrice, shippingCharge } = useSelector((state) => state.cartReducer)
+    console.log(cartItems)  
+
+    const dispatch = useDispatch()
+
+    const handleUpdateCart = () => {
+        dispatch(updateCart(cartItems)) 
+        dispatch(calculatePrice())
+        toast.success("Cart updated successfully")
+        // window.location.reload()
+    }
+
     return (
         <>
         <BreadCrumb mainSection={"Shopping Cart"} />
@@ -25,46 +36,43 @@ const Cart = () => {
                                             <th scope='col'>Price</th>
                                             <th scope='col'>Quantity</th>
                                             <th scope='col'>Sub-Total</th>
+                                            <th scope='col'></th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {cartItems.map((item, index) => {
+                                        {cartItems.map((item, index) => {  
                                             const [productQty, setProductQty] = useState(item.quantity)
-
+                                            console.log(productQty)
+  
                                             const handleIncreaseQty = () => { 
                                                 if(productQty < 10){
-                                                    setProductQty(quantity => quantity += 1)
-                                                }
+                                                    setProductQty(quantity => quantity += 1)  
+                                                } 
                                             }
+
                                             const handleDecreaseQty = () => {
                                                 if(productQty > 1){
                                                     setProductQty(quantity => quantity -= 1)
-                                                }
+                                                }  
                                             }
                                         
                                             const handleChange = (e) => {
                                                 e.preventDefault()
-                                                setProductQty(e.target.value)
+                                                setProductQty(e.target.value) 
                                             }
 
-                                            const subtotal = item.price * productQty
+                                            const productSubtotal = item.price * productQty  
+
                                             return (
                                                 <tr key={index}>
                                                     <td className='cart-product'>
-                                                        <span className="product-wrapper">
-                                                            <button className="close-btn">
-                                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                    <path d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21Z" stroke="#929FA5" strokeWidth="1.5" strokeMiterlimit="10"></path>
-                                                                    <path d="M15 9L9 15" stroke="#929FA5" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path>
-                                                                    <path d="M15 15L9 9" stroke="#929FA5" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path>
-                                                                </svg>
-                                                            </button>
+                                                        <span className="product-wrapper"> 
                                                             <img src={item.image} alt="" />
                                                             <span className="product-text">{item.name}</span>
                                                         </span>
                                                     </td>
                                                     <td className='cart-price'>
-                                                        ${item.price} 
+                                                        ${Number.parseFloat(item.price).toFixed(2)} 
                                                     </td>
                                                     <td className='cart-quantity'>
                                                         <div className="product-quantity-count">
@@ -82,7 +90,18 @@ const Cart = () => {
                                                             </button>
                                                         </div>
                                                     </td>
-                                                    <td className='cart-subtotal'>${subtotal}</td>
+                                                    <td className='cart-subtotal'>
+                                                        ${Number.parseFloat(productSubtotal).toFixed(2)} 
+                                                    </td>
+                                                    <td>
+                                                        <button className="close-btn">
+                                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21Z" stroke="#929FA5" strokeWidth="1.5" strokeMiterlimit="10"></path>
+                                                                <path d="M15 9L9 15" stroke="#929FA5" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path>
+                                                                <path d="M15 15L9 9" stroke="#929FA5" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path>
+                                                            </svg>
+                                                        </button>
+                                                    </td>
                                                 </tr>
                                             )
                                         })}  
@@ -97,7 +116,7 @@ const Cart = () => {
                                     </svg>
                                     Return to Shop
                                 </a>
-                                <button href="/shop" className='btn btn-outline-secondary'>
+                                <button onClick={handleUpdateCart} className='btn btn-outline-secondary'>
                                     Update Cart
                                 </button>
                             </div>
@@ -105,28 +124,31 @@ const Cart = () => {
                     </div>
                     <div className="col-xxl-4">
                         <div className="shopping-cart-total-wrapper">
-                            <h6 className="total-title">Cart Total</h6>
+                            <div className="cart-total">
+                                <h6 className="total-title">Cart Total</h6>
+                                <h6 className="total-qty">({quantity})</h6>
+                            </div> 
                             <ul className="subtotal-list">
                                 <li>
                                     <span className="subtotal-text">Sub-total</span>
-                                    <span className="subtotal-amount">$320</span>
+                                    <span className="subtotal-amount">${Number.parseFloat(subtotal).toFixed(2)}</span>
                                 </li>
                                 <li>
                                     <span className="subtotal-text">Shipping</span>
-                                    <span className="subtotal-amount">Free</span>
+                                    <span className="subtotal-amount">{shippingCharge === 0 ? "Free" : shippingCharge}</span>
                                 </li>
-                                <li>
+                                {/* <li>
                                     <span className="subtotal-text">Discount</span>
                                     <span className="subtotal-amount">$24</span>
                                 </li>
                                 <li>
                                     <span className="subtotal-text">Tax</span>
                                     <span className="subtotal-amount">$61.99</span>
-                                </li>
+                                </li> */}
                                 <li className="subtotal-line"></li>
                                 <li>
                                     <span className="grandtotal-text">Total</span>
-                                    <span className="grandtotal-amount">HKD ${cart[0].totalPrice}</span>  
+                                    <span className="grandtotal-amount">HKD ${Number.parseFloat(totalPrice).toFixed(2)}</span>  
                                 </li>
                             </ul>
                             <button className="btn btn-primary w-100 checkout-cart-btn">
