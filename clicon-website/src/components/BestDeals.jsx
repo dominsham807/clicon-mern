@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { FaStar } from 'react-icons/fa6'
-import axios from 'axios';
-import ProductModal from './ProductModal'; 
+import axios from 'axios'; 
 import { BACKEND_URL } from '../constants';
 
 import "../styles/bestdeals.css"
@@ -27,12 +26,10 @@ const BestDeals = ({ setShowModal, setSelectedProduct }) => {
 
     const [bestDealsProducts, setBestDealsProducts] = useState([])
 
-
     const fetchBestDealsProducts = async() => {
         const res = await axios.get(`${BACKEND_URL}/api/v1/product/bestdeals`)
         setBestDealsProducts(res.data.products) 
     }
-
  
     useEffect(() => {
         fetchBestDealsProducts()  

@@ -1,12 +1,12 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 import "../styles/pagination.css"
 
-const Pagination = () => {
-    const pageArray = [...Array(6).keys()].map(i => i + 1)
+const Pagination = ({ totalPages, currentPage, setCurrentPage }) => {
+    const pageArray = [...Array(totalPages).keys()].map(i => i + 1)
     console.log(pageArray)
 
-    const [currentPage, setCurrentPage] = useState(1)
+    // const [currentPage, setCurrentPage] = useState(1)
     
     return (
         <div className='pagination-row'>
@@ -21,7 +21,7 @@ const Pagination = () => {
                 </li> 
                 {pageArray.map((pageNum, index) => (
                     <li key={index}>
-                        <a className={`page-link ${currentPage === pageNum ? "active" : ""}`} href={`?page=${pageNum}`}>
+                        <a className={`page-link ${currentPage === pageNum ? "active" : ""}`} href={`?page=${pageNum}`} onClick={() => setCurrentPage(pageNum)}>
                             {pageNum}
                         </a>
                     </li>

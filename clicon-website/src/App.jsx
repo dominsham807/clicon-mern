@@ -1,4 +1,6 @@
+import { useState } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { Toaster } from 'react-hot-toast'
 import Home from './pages/Home'
 import Layout from './components/Layout'
 import Shop from './pages/Shop'
@@ -20,19 +22,41 @@ import Support from './pages/Support'
 import Checkout from './pages/Checkout'
 import Compare from './pages/Compare'
 import Verify from './pages/Verify' 
-
-import { Toaster } from 'react-hot-toast'
+import ProductModal from './components/ProductModal'
 
 import './App.css'
 
 function App() {  
+  const [showModal, setShowModal] = useState(false)
+  const [selectedProduct, setSelectedProduct] = useState({
+      availability: false,
+      brand: "",
+      category: "",
+      description: "",
+      discountPercentage: 0,
+      discountedPrice: 0, 
+      id: 0,
+      image: "", 
+      isBestDeal: false,
+      isFeatured: false,
+      isFreeShipping: false, 
+      name: "", 
+      price: 0, 
+      promotion: [],
+      ratings: 0, 
+      sku: "CLI00009",
+      stockCount: 0, 
+      subCategory: "",
+      _id: "" 
+  })
+
   return (
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<Layout />}>
-          <Route path='/' element={<Home />} />
+          <Route path='/' element={<Home setShowModal={setShowModal} setSelectedProduct={setSelectedProduct} />} />
           <Route path='/about' element={<About />} />
-          <Route path='/shop' element={<Shop />} />
+          <Route path='/shop' element={<Shop setShowModal={setShowModal} setSelectedProduct={setSelectedProduct} />} />
           <Route path='/categories/:category' />
           <Route path='/product' element={<SingleProduct />} />
           <Route path='/dashboard' element={<Dashboard />} />
@@ -52,6 +76,7 @@ function App() {
           <Route path='*' element={<PageNotFound />} /> 
         </Route> 
       </Routes>
+      <ProductModal show={showModal} setShow={setShowModal} selectedProduct={selectedProduct} />
       <Toaster position='bottom-center' />
       <ModeSwitcher />
     </BrowserRouter>

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import toast from 'react-hot-toast'
 import BreadCrumb from '../components/BreadCrumb'
-import { calculatePrice, updateCart } from '../redux/reducers/cartReducer.js'
+import { calculatePrice, decreaseQty, increaseQty, updateCart } from '../redux/reducers/cartReducer.js'
 
 import "../styles/cart.css"
 
@@ -17,6 +17,16 @@ const Cart = () => {
         dispatch(calculatePrice())
         toast.success("Cart updated successfully")
         // window.location.reload()
+    }
+
+    const increaseHandler = (item) => {
+        dispatch(increaseQty(item))
+        dispatch(calculatePrice())
+    }
+
+    const decreaseHandler = (item) => {
+        dispatch(decreaseQty(item))
+        dispatch(calculatePrice())
     }
 
     return (
@@ -40,29 +50,7 @@ const Cart = () => {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {cartItems.map((item, index) => {  
-                                            const [productQty, setProductQty] = useState(item.quantity)
-                                            console.log(productQty)
-  
-                                            const handleIncreaseQty = () => { 
-                                                if(productQty < 10){
-                                                    setProductQty(quantity => quantity += 1)  
-                                                } 
-                                            }
-
-                                            const handleDecreaseQty = () => {
-                                                if(productQty > 1){
-                                                    setProductQty(quantity => quantity -= 1)
-                                                }  
-                                            }
-                                        
-                                            const handleChange = (e) => {
-                                                e.preventDefault()
-                                                setProductQty(e.target.value) 
-                                            }
-
-                                            const productSubtotal = item.price * productQty  
-
+                                        {cartItems.map((item, index) => {   
                                             return (
                                                 <tr key={index}>
                                                     <td className='cart-product'>
@@ -76,13 +64,13 @@ const Cart = () => {
                                                     </td>
                                                     <td className='cart-quantity'>
                                                         <div className="product-quantity-count">
-                                                            <button className="button-count quantity-decrease" onClick={() => handleDecreaseQty()}>
+                                                            <button className="button-count quantity-decrease" onClick={() => decreaseHandler(item)}>
                                                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                                     <path d="M2.5 8H13.5" stroke="#191C1F" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path>
                                                                 </svg>
                                                             </button>
-                                                            <input onChange={handleChange} type="number" className='number-product' value={productQty} min={1} max={10} />
-                                                            <button className="button-count quantity-increase" onClick={() => handleIncreaseQty()}>
+                                                            <input readOnly type="number" className='number-product' value={item.quantity} min={1} max={10} />
+                                                            <button className="button-count quantity-increase" onClick={() => increaseHandler(item)}>
                                                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                                     <path d="M2.5 8H13.5" stroke="#191C1F" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path>
                                                                     <path d="M8 2.5V13.5" stroke="#191C1F" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path>
@@ -91,7 +79,7 @@ const Cart = () => {
                                                         </div>
                                                     </td>
                                                     <td className='cart-subtotal'>
-                                                        ${Number.parseFloat(productSubtotal).toFixed(2)} 
+                                                        ${Number.parseFloat(item.price * item.quantity).toFixed(2)} 
                                                     </td>
                                                     <td>
                                                         <button className="close-btn">
