@@ -32,13 +32,21 @@
     font-size: 16px;
     line-height: 20px;
     color: var(--bs-gray-600);
+    border-color: var(--bs-primary-500);
     transition: .3s;
 }
-.pagination-ul li .page-link:hover{
+.pagination-ul li .page-link.arrow{
+    border-color: var(--bs-primary-500);
+}
+.pagination-ul li .page-link.arrow:disabled{
+    color: var(--bs-gray-200);
+    border-color: var(--bs-gray-100);
+}
+.pagination-ul li .page-link:not([disabled]):hover {
     background: var(--bs-primary-500);
     border-color: var(--bs-primary-500);
     color: #fff;
 }
-.pagination-ul li .page-link:hover svg path{
+.pagination-ul li .page-link:not([disabled]):hover svg path{
     stroke: #fff;
 }

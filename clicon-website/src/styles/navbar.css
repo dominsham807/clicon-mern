@@ -270,13 +270,17 @@
 }
 .cart-single{
     display: flex;
-    align-items: center;
+    align-items: center; 
     margin-bottom: 15px;
     gap: 15px;
 }
-.cart-image{
-    width: 150px;
+.cart-image{  
+    width: 120px;
     border: 1px solid #e4e7e9;
+}
+.cart-image img{ 
+    width: 100%;
+    object-fit: cover;
 }
 .cart-item{
     display: flex;
@@ -287,6 +291,7 @@
     font-weight: normal;
     font-size: 14px;
     line-height: 20px;
+    padding-right: 90px;
     color: var(--bs-gray-900);
 }
 .cart-price .count{

@@ -37,7 +37,7 @@
         <path
            d="M 0,0 C 2.83,2.564 4.608,6.27 4.608,10.392 C 4.608,14.513 2.83,18.218 0,20.783"
            id="path2913"
-           style="fill:none;stroke:#009cdc;stroke-width:0.1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+           style="fill:none;stroke:#009cdc;strokeWidth:0.1;strokeLinecap:butt;strokeLinejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
       </g>
       <g
          transform="matrix(22.681031,0,0,-22.681031,632.7127,199.5575)"

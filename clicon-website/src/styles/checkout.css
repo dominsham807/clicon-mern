@@ -1,0 +1,114 @@
+.checkout-body{
+    padding: 50px 0;
+}
+.order-summary{
+    padding: 24px;
+    border-radius: 5px;
+    border: 1px solid var(--bs-gray-100);
+}
+.order-summary .popup-body{
+    padding: 5px;
+}
+.order-summary .popup-body .cart-single .cart-image{
+    width: 150px;
+}
+.order-summary .popup-subtotal{
+    padding: 16px 10px;
+}
+.summary-title{
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    margin-bottom: 20px;
+    color: var(--bs-gray-900);
+}
+
+.billing-info{
+    margin-bottom: 30px;
+}
+.billing-title{
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    color: var(--bs-gray-900);
+    margin-bottom: 24px;
+}
+
+.payment-option-box{
+    margin-bottom: 40px;
+}
+.payment-form{
+    border: 1px solid var(--bs-gray-100);
+    border-radius: 4px;
+}
+.payment-title{
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 24px;
+    padding: 20px 24px;
+    color: var(--bs-gray-900);
+}
+.payment-option{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24px;
+    border-top: 1px solid var(--bs-gray-100);
+    border-bottom: 1px solid var(--bs-gray-100); 
+    overflow-x: auto;
+}
+.payment-content{
+    text-align: center;
+    min-width: 160px; 
+}
+.payment-content:not(.payment-content:last-child){
+    border-right: 1px solid var(--bs-gray-100);
+}
+.payment-text{
+    padding-top: 10px;
+}
+.payment-content .form-check{
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    margin-top: 16px;
+}
+.payment-content .form-check .form-check-input{
+    margin: 0;
+    padding: 0;
+    width: 20px;
+    height: 20px;
+    border-radius: 500px;
+}
+.payment-content .form-check .form-check-input:checked{
+    background-color: #FA8232;
+    border-color: #FA8232;
+}
+
+.payment-form-details{
+    padding: 30px;
+}
+
+.payment-additional-box{
+    padding: 30px 0;
+}
+.payment-additional-box .additional-title{
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 30px;
+    color: var(--bs-gray-900);
+    margin-bottom: 24px;
+}
+.payment-additional-box .form-label{
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 20px;
+    color: var(--bs-gray-900); 
+}
+
+@media screen and (max-width: 991px) {
+    .order-summary{
+        margin-bottom: 40px;
+    }
+}

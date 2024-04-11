@@ -9,10 +9,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
 import toast from 'react-hot-toast'
 import { useAuth } from '../context/auth'
-import { loginUser, logoutUser } from '../redux/reducers/userReducer.js'
-import { calculatePrice } from '../redux/reducers/cartReducer.js'
-import Logo from "/logo.png" 
+import { loginUser, logoutUser } from '../redux/reducers/userReducer.js' 
 import { BACKEND_URL } from '../constants'
+import Logo from "/logo.png" 
 
 import "../styles/navbar.css"
 
@@ -249,7 +248,7 @@ const Navbar = () => {
                                                             22H10.5125C10.0771 22.0025 9.65293 21.862 9.30515 21.6001C8.95738 21.3381 8.70524 20.9692 8.5875 20.55L4.0625
                                                             4.725C4.0027 4.51594 3.8764 4.33207 3.70271 4.20125C3.52903 4.07042 3.31744 3.99977 3.1 4H1" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"></path>
                                 </svg>
-                                <span className="cart-amount">2</span>
+                                <span className="cart-amount">{cartItems?.length}</span>
                             </div>
                             <div className={`cart-popup ${showCart ? 'active' : ""}`}>
                                 <div className="popup-header">
@@ -287,7 +286,7 @@ const Navbar = () => {
                                 </div>
                                 <div className="popup-subtotal">
                                     <div className="subtotal-text">Shipping Charge</div>
-                                    <div className="subtotal-price">HKD ${shippingCharge}</div>
+                                    <div className="subtotal-price">{shippingCharge === 0 ? "Free" : `HKD $${shippingCharge}`}</div>
                                 </div>
                                 <div className="popup-subtotal">
                                     <div className="subtotal-text">Total Price</div>
