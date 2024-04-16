@@ -7,7 +7,7 @@ const initialState = {
     subtotal: 0, 
     totalPrice: 0,
     shippingCharge: 0,
-    discountPercentage: 0,
+    discount: 0,
     color: "",
     size: "",
     memory: "",
@@ -48,11 +48,23 @@ export const cartReducer = createSlice({
                 state.cartItems[index].quantity -= 1 
             } 
         },
+        removeItem: (state, action) => {
+            state.loading = true
+            state.cartItems = state.cartItems.filter(
+                (i) => i.id !== action.payload.id 
+            )
+            state.loading = false 
+        },
         updateCart: (state, action) => {
             state.loading = true
             state.cartItems = action.payload
             console.log(action.payload)
             state.loading = false
+        },
+        calculateDiscount: (state) => {
+            state.discount = state.cartItems.reduce((discountTotal, item) => {
+                return discountTotal + item.discount
+            }, 0)
         },
         calculatePrice: (state) => {
             state.quantity = state.cartItems.reduce((qtyTotal, item) => {
@@ -68,8 +80,20 @@ export const cartReducer = createSlice({
                 state.shippingCharge = 0
             }
             state.totalPrice = state.subtotal + state.shippingCharge
+        },
+        resetCart: (state) => {
+            state.cartItems = [],
+            state.quantity = 0,
+            state.subtotal = 0, 
+            state.totalPrice = 0,
+            state.shippingCharge = 0,
+            state.discount = 0,
+            state.color = "",
+            state.size = "",
+            state.memory = "",
+            state.storage = ""
         }
     }
 })
 
-export const { addToCart, increaseQty, decreaseQty, updateCart, calculatePrice } = cartReducer.actions
+export const { addToCart, increaseQty, decreaseQty, removeItem, updateCart, calculateDiscount, calculatePrice, resetCart } = cartReducer.actions

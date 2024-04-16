@@ -1,12 +1,31 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useParams } from "react-router-dom"
+import axios from "axios"
 import BreadCrumb from '../components/BreadCrumb'
 import { PiNotebook } from 'react-icons/pi'
 import { FiPackage } from "react-icons/fi"
+import { FaRegHandshake, FaTruckMoving } from 'react-icons/fa6'
+import { BACKEND_URL } from '../constants'
 
 import "../styles/track-order-detail.css"
-import { FaRegHandshake, FaTruckMoving } from 'react-icons/fa6'
 
 const TrackOrderDetail = () => {
+    const param = useParams()
+    console.log(param.id)
+
+    const [totalPrice, setTotalPrice] = useState(0)
+    const [quantity, setQuantity] = useState(0)
+    const [status, setStatus] = useState("")
+
+    const fetchSingleOrder = async() => {
+        const res = await axios.get(`${BACKEND_URL}/api/v1/order/${param.id}`)
+        console.log(res.data.order)
+        setTotalPrice(res.data.order.totalPrice)
+        setQuantity(res.data.order.quantity)
+        setStatus(res.data.order.shippingInfo.status)
+    }
+    fetchSingleOrder()
+
     return (
         <>
         <BreadCrumb parentSection={"Track Order"} mainSection={"Order Details"} />
@@ -18,23 +37,28 @@ const TrackOrderDetail = () => {
                             <div className="shipping-details">
                                 <div className="shipping-details-head">
                                     <div className="order-tag">
-                                        <h6 className="tag-text">#96512578</h6>
+                                        <h6 className="tag-text">#{param.id}</h6>
                                         <p className="tag-info">
-                                            4 Products
+                                            {quantity} Products
                                             <span className="dot d-none d-md-block"></span>
                                             <br className="d-md-none" />
                                             Order Placed on 20 Mar, 2024 at 7:30 PM
                                         </p>
                                     </div>
                                     <div className="price-tag">
-                                        <span>$1200.00</span>
+                                        <span>${Number.parseFloat(totalPrice).toFixed(2)}</span>
                                     </div>
                                 </div>
                                 <div className="shipping-details-text">
-                                    Order expected arrival date: <span>28 Mar, 2024</span>
+                                    <div className='shipping-date'>
+                                        Order expected arrival date: <span>28 Mar, 2024</span>
+                                    </div>
+                                    <div className='shipping-status'>
+                                        Status: <b>{status}</b>
+                                    </div>
                                 </div>
                                 <div className="shipping-details-progress">
-                                    <div className="next-step-item next-step-item-finish">
+                                    <div className={`next-step-item ${status === "Processing" ? "next-step-item-finish" : ""} `}>
                                         <div className="next-step-item-tail">
                                             <div className="next-step-item-tail-underlay">
                                                 <div className="next-step-item-tail-overlay"></div>

@@ -1,11 +1,21 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import toast from 'react-hot-toast'
+import axios from 'axios'
 import BreadCrumb from '../components/BreadCrumb'
+import { BACKEND_URL } from '../constants'
+import { resetCart } from '../redux/reducers/cartReducer'
 
 import "../styles/checkout.css"
 
 const Checkout = () => {
     const { cartItems, quantity, subtotal, totalPrice, shippingCharge } = useSelector((state) => state.cartReducer)
+    const { user } = useSelector((state) => state.userReducer)
+    console.log(cartItems)
+
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
 
     const [firstName, setFirstName] = useState("")
     const [lastName, setLastName] = useState("")
@@ -18,19 +28,50 @@ const Checkout = () => {
     const [city, setCity] = useState("")
     const [state, setState] = useState("")
 
-    const [paymentOption, setPaymentOption] = useState("")
-    console.log(paymentOption) 
+    const [paymentOption, setPaymentOption] = useState("") 
     const [cardNum, setCardNum] = useState("") 
     const [expiryDate, setExpiryDate] = useState("") 
 
     const [remark, setRemark] = useState("")
+
+    const handleCheckout = async(e) => {
+        e.preventDefault()
+        try{
+            const res = await axios.post(`${BACKEND_URL}/api/v1/order`, {
+                userId: user._id,
+                firstName, lastName, email,
+                phone: contact,
+                shippingInfo: {
+                    address: address,
+                    city: city,
+                    state: state,
+                    paymentOption: paymentOption,
+                    cardNum: cardNum 
+                },
+                quantity, subtotal, shippingCharge, totalPrice, cartItems
+            })
+            console.log(res)
+            if(res?.data?.success){  
+                toast.success(res.data.message)
+                dispatch(resetCart())
+                navigate("/checkout/success", {
+                    state : {
+                        orderId: res.data.order._id
+                    }
+                })
+            } 
+        } catch(error){
+            console.log(error)
+            toast.error("Order Failure")
+        } 
+    }
 
     return (
         <>
         <BreadCrumb parentSection={"Shopping Cart"} mainSection={"Checkout"} />
         <div className="checkout-body">
             <div className="container">
-                <form action="">
+                <form onSubmit={handleCheckout}>
                     <div className="row justify-content-center">
                         <div className="col-lg-4 order-lg-2">
                             <div className="order-summary">
@@ -63,7 +104,7 @@ const Checkout = () => {
                                 </div>
                                 <div className="popup-subtotal">
                                     <div className="subtotal-text">Subtotal</div>
-                                    <div className="subtotal-price">HKD ${subtotal}</div>
+                                    <div className="subtotal-price">HKD ${Number.parseFloat(subtotal).toFixed(2)}</div>
                                 </div>
                                 <div className="popup-subtotal">
                                     <div className="subtotal-text">Shipping Charge</div>
@@ -71,8 +112,11 @@ const Checkout = () => {
                                 </div>
                                 <div className="popup-subtotal">
                                     <div className="subtotal-text">Total Price</div>
-                                    <div className="subtotal-price">HKD ${totalPrice}</div>
+                                    <div className="subtotal-price">HKD ${Number.parseFloat(totalPrice).toFixed(2)}</div>
                                 </div>
+                                <button className='btn btn-primary w-100' type='submit'>
+                                    Confirm
+                                </button>
                             </div>
                         </div>
                         <div className="col-lg-8 order-lg-1"> 

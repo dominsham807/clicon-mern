@@ -48,15 +48,17 @@
 }
 
 .shipping-details-text{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     margin: 24px 0;    
     font-weight: normal;
     font-size: 16px;
     line-height: 20px;
     color: var(--bs-gray-700);
 }
-.shipping-details-text span{
-    font-weight: 700;
-    color: var(--bs-gray-900);
+.shipping-status{
+    padding-right: 5px;
 }
 
 .shipping-details-progress{

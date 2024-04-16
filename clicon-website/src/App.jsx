@@ -23,6 +23,7 @@ import Checkout from './pages/Checkout'
 import Compare from './pages/Compare'
 import Verify from './pages/Verify' 
 import ProductModal from './components/ProductModal'
+import CheckoutSuccess from './pages/CheckoutSuccess'
 
 import './App.css'
 
@@ -61,10 +62,11 @@ function App() {
           <Route path='/product' element={<SingleProduct />} />
           <Route path='/dashboard' element={<Dashboard />} />
           <Route path='/orders' element={<TrackOrder />} />
-          <Route path='/order-details' element={<TrackOrderDetail />} />
+          <Route path='/order/:id' element={<TrackOrderDetail />} />
           <Route path='/wishlist' element={<Wishlist />} />
           <Route path='/cart' element={<Cart />} />
           <Route path='/checkout' element={<Checkout />} />
+          <Route path='/checkout/success' element={<CheckoutSuccess />} />
           <Route path='/compare' element={<Compare />} />
           <Route path='/signin' element={<Signin />} />
           <Route path='/signup' element={<Signup />} />

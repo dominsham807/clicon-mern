@@ -4,18 +4,26 @@ const orderItemSchema = new mongoose.Schema({
     productId: {
         type: mongoose.Types.ObjectId,
         ref: 'Product'
-    },
-    orderId: {
-        type: mongoose.Types.ObjectId,
-        ref: 'Order'
-    },
+    }, 
     quantity: {
         type: Number
     },
-    unitPrice: {
+    color: {
+        type: String
+    },
+    size: {
+        type: String
+    },
+    memory: {
+        type: String
+    }, 
+    storage: {
+        type: String
+    },
+    price: {
         type: Number 
     },
-    unitDiscountPrice: {
+    discount: {
         type: Number
     }
 })

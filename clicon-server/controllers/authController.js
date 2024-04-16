@@ -1,13 +1,11 @@
 import crypto from "crypto"
 import User from "../models/User.js"
-import Token from "../models/Token.js"
 import BadRequestError from "../errors/bad-request.js"
 import sendVerificationEmail from "../utils/sendVerificationEmail.js"
 import UnauthenticatedError from "../errors/unauthenticated.js"
 import { StatusCodes } from "http-status-codes"
 import notFound from "../middlewares/not-found.js"
-import createUserToken from "../utils/createUserToken.js"
-import { attachCookiesToResponse, generateToken } from "../utils/jwt.js"
+import { generateToken } from "../utils/jwt.js"
 
 export const registerUser = async(req, res) => {
     try{

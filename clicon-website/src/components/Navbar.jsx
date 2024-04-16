@@ -282,7 +282,7 @@ const Navbar = () => {
                                 </div>
                                 <div className="popup-subtotal">
                                     <div className="subtotal-text">Subtotal</div>
-                                    <div className="subtotal-price">HKD ${subtotal}</div>
+                                    <div className="subtotal-price">HKD ${Number.parseFloat(subtotal).toFixed(2)}</div>
                                 </div>
                                 <div className="popup-subtotal">
                                     <div className="subtotal-text">Shipping Charge</div>
@@ -290,7 +290,7 @@ const Navbar = () => {
                                 </div>
                                 <div className="popup-subtotal">
                                     <div className="subtotal-text">Total Price</div>
-                                    <div className="subtotal-price">HKD ${totalPrice}</div>
+                                    <div className="subtotal-price">HKD ${Number.parseFloat(totalPrice).toFixed(2)}</div>
                                 </div>
                                 <div className="cart-button-group" href="/checkout">
                                     <a type='submit' className="checkout-btn">

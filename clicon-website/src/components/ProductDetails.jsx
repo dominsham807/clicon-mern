@@ -1,19 +1,17 @@
 import React, { useEffect, useRef, useState } from 'react'  
 import { FaFacebook, FaAngleDown, FaStar, FaInstagram, FaPinterest } from 'react-icons/fa'
 import { BsCopy } from "react-icons/bs"
-import { CiHeart } from 'react-icons/ci'
-import { useNavigate } from 'react-router-dom'
+import { CiHeart } from 'react-icons/ci' 
 import { useDispatch } from 'react-redux'
-import { addToCart, calculatePrice } from '../redux/reducers/cartReducer.js'
+import { addToCart, calculateDiscount, calculatePrice } from '../redux/reducers/cartReducer.js'
 
 import "../styles/product-details.css"
 import toast from 'react-hot-toast'
 
 const ProductDetails = ({ selectedProduct }) => {
-    const { id, name, sku, image, brand, price, discountedPrice, availability, ratings, category, promotion, discountPercentage } = selectedProduct 
-    console.log(id)
-
-    const navigate = useNavigate()
+    const { _id, name, sku, image, brand, price, discountedPrice, availability, ratings, category, promotion, discountPercentage } = selectedProduct 
+    console.log(_id)
+ 
     const dispatch = useDispatch()
 
     const [showSizeBox, setShowSizeBox] = useState(false)
@@ -76,19 +74,21 @@ const ProductDetails = ({ selectedProduct }) => {
         e.preventDefault()
 
         dispatch(addToCart({
-            id: id,
+            id: _id,
             name: name,
             image: image,
             sku: sku,
             image: image,
             quantity: productQty,
             price: discountedPrice ? discountedPrice : price, 
-            discountPercentage: discountPercentage,
+            discount: discountedPrice ? price - discountedPrice : 0,
+            // discountPercentage: discountPercentage,
             color: color,
             size: selectedSize,
             memory: selectedMemory,
             storage: selectedStorage,
         }))
+        dispatch(calculateDiscount())
         dispatch(calculatePrice())
         toast.success("Product added to cart successfully")
     }

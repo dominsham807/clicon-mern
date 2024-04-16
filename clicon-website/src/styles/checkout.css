@@ -107,6 +107,30 @@
     color: var(--bs-gray-900); 
 }
 
+.checkout-success-body{
+    padding: 80px 0;
+}
+.checkout-success-body-wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+.checkout-success-text{
+    font-size: 24px;
+    font-weight: bold;
+}
+.checkout-btn-group{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.checkout-btn-group a{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
 @media screen and (max-width: 991px) {
     .order-summary{
         margin-bottom: 40px;
