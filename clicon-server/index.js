@@ -35,9 +35,9 @@ app.use(cookieParser(process.env.JWT_SECRET))
 app.use(express.static("public"))
 
 
-app.get("/", (req,res)=>{
-    res.send("Welcome to Clicon Ecommerce website")
-})
+// app.get("/", (req,res)=>{
+//     res.send("Welcome to Clicon Ecommerce website")
+// })
 
 app.use("/api/v1/auth", authRoutes)
 app.use("/api/v1/user", userRoutes)
