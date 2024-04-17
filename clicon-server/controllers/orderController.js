@@ -57,9 +57,35 @@ export const getAllOrders = async(req, res) => {
     }
 }
 
+export const updateStock = async(req, res) => {
+
+}
+
+export const getOrderStatus = async(req, res) => {
+    try{
+        const totalOrders = await Order.countDocuments({})
+        console.log(totalOrders)
+        const completedOrders = await Order.find({ "shippingInfo.status": "Completed" }).countDocuments({})
+        const pendingOrders = totalOrders - completedOrders
+        console.log(completedOrders)
+        res.status(StatusCodes.OK).json({
+            success: true,
+            pendingOrders,
+            completedOrders
+        })
+    } catch(error){
+        res.status(500).send({
+            success: false,
+            message: "Failed to fetch order status",
+            error 
+        })
+        console.log(error)
+    }
+}
+
 export const getSingleOrder = async(req, res) => {
     try{
-        const order = await Order.findById(req.params.id).select("shippingInfo orderItems firstName lastName email phone quantity subtotal shippingCharge totalPrice")
+        const order = await Order.findOne({ orderId: req.params.id }).select("shippingInfo orderItems firstName lastName email phone quantity subtotal shippingCharge totalPrice")
         const orderItems = []
 
         for (const item of order.orderItems){

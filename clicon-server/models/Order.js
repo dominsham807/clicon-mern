@@ -1,7 +1,12 @@
 import mongoose from "mongoose"
-import validator from "validator"
+import { ObjectId } from "mongodb"
+import validator from "validator" 
 
 const orderSchema = new mongoose.Schema({
+    orderId: {
+        type: String,
+        default: (Math.random()+' ').substring(2,10)
+    },
     userId: {
         type: mongoose.Types.ObjectId,
         ref: 'User'
@@ -52,7 +57,7 @@ const orderSchema = new mongoose.Schema({
         },
         status: {
             type: String,
-            enum: ["Processing", "Packaging", "Shipped", "Delivered"],
+            enum: ["Processing", "Packaging", "Shipped", "Completed"],
             default: "Processing"
         }
     }, 

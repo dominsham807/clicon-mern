@@ -21,7 +21,7 @@ const Navbar = () => {
 
     const { user } = useSelector((state) => state.userReducer)
     const { cartItems, quantity, subtotal, totalPrice, shippingCharge } = useSelector((state) => state.cartReducer)
-    console.log(subtotal)
+    console.log(cartItems)
     console.log(totalPrice)
 
     const [auth, setAuth] = useAuth()
@@ -255,7 +255,7 @@ const Navbar = () => {
                                     <h6 className="title">Shopping Cart <span>({cartItems?.length})</span></h6>
                                 </div>
                                 <div className="popup-body"> 
-                                    {cartItems.map((item, index) => (
+                                    {cartItems.length > 0 ? cartItems.map((item, index) => (
                                         <div className="cart-single" key={index}>
                                             <div className="cart-image">
                                                 <img src={item.image} alt="" />
@@ -274,26 +274,34 @@ const Navbar = () => {
                                                 </svg>
                                             </div>
                                         </div> 
-                                    ))}  
+                                    )) : (
+                                        <div className='empty-cart-message'>
+                                            <h2>No items in cart</h2>
+                                        </div>
+                                    )}  
                                 </div>
-                                <div className="popup-subtotal">
-                                    <div className="subtotal-text">Total No. of Items</div>
-                                    <div className="subtotal-price">{quantity}</div>
-                                </div>
-                                <div className="popup-subtotal">
-                                    <div className="subtotal-text">Subtotal</div>
-                                    <div className="subtotal-price">HKD ${Number.parseFloat(subtotal).toFixed(2)}</div>
-                                </div>
-                                <div className="popup-subtotal">
-                                    <div className="subtotal-text">Shipping Charge</div>
-                                    <div className="subtotal-price">{shippingCharge === 0 ? "Free" : `HKD $${shippingCharge}`}</div>
-                                </div>
-                                <div className="popup-subtotal">
-                                    <div className="subtotal-text">Total Price</div>
-                                    <div className="subtotal-price">HKD ${Number.parseFloat(totalPrice).toFixed(2)}</div>
-                                </div>
+                                {cartItems.length > 0 && (
+                                    <>
+                                    <div className="popup-subtotal">
+                                        <div className="subtotal-text">Total No. of Items</div>
+                                        <div className="subtotal-price">{quantity}</div>
+                                    </div>
+                                    <div className="popup-subtotal">
+                                        <div className="subtotal-text">Subtotal</div>
+                                        <div className="subtotal-price">HKD ${Number.parseFloat(subtotal).toFixed(2)}</div>
+                                    </div>
+                                    <div className="popup-subtotal">
+                                        <div className="subtotal-text">Shipping Charge</div>
+                                        <div className="subtotal-price">{shippingCharge === 0 ? "Free" : `HKD $${shippingCharge}`}</div>
+                                    </div>
+                                    <div className="popup-subtotal">
+                                        <div className="subtotal-text">Total Price</div>
+                                        <div className="subtotal-price">HKD ${Number.parseFloat(totalPrice).toFixed(2)}</div>
+                                    </div> 
+                                    </>
+                                )} 
                                 <div className="cart-button-group" href="/checkout">
-                                    <a type='submit' className="checkout-btn">
+                                    <a href="/checkout" className="checkout-btn">
                                         Checkout 
                                         <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M3.625 10H17.375" stroke="#191C1F" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path>

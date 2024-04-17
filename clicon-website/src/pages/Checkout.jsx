@@ -56,7 +56,7 @@ const Checkout = () => {
                 dispatch(resetCart())
                 navigate("/checkout/success", {
                     state : {
-                        orderId: res.data.order._id
+                        orderId: res.data.order.orderId
                     }
                 })
             } 
@@ -188,7 +188,7 @@ const Checkout = () => {
                             </div>
                             <div className="payment-option-box">
                                 <div className="payment-form">
-                                    <h6 className="payment-title">Payment Option</h6>
+                                    <h6 className="payment-option-title">Payment Option</h6>
                                     <div className="payment-option">
                                         <div className="payment-content">
                                             <div className="payment-head">

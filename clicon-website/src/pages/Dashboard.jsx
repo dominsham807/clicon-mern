@@ -1,13 +1,70 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import CountUp from "react-countup"
+import { useDispatch, useSelector } from 'react-redux'
+import axios from 'axios'
 import BreadCrumb from '../components/BreadCrumb'
 import DashboardSideNav from '../components/DashboardSideNav'
 import PaymentCardModal from '../components/PaymentCardModal' 
 
 import "../styles/dashboard.css"
+import { BACKEND_URL } from '../constants'
 
 const Dashboard = () => {
+    const { user } = useSelector((state) => state.userReducer)
+    console.log(user)
+
+    const [firstName, setFirstName] = useState("")
+    const [lastName, setLastName] = useState("") 
+    const [email, setEmail] = useState("") 
+    const [username, setUsername] = useState("")
+    const [phoneNumber, setPhoneNumber] = useState("")
+    const [country, setCountry] = useState("")
+    const [address, setAddress] = useState("")
+    const [photo, setPhoto] = useState("")
+    const [photoPreview, setPhotoPreview] = useState('')
+    const [photoName, setPhotoName] = useState("")
+
     const [showCardModal, setShowCardModal] = useState(false)
+    // const [orders, setOrders] = useState([])
+    const [totalOrders, setTotalOrders] = useState(0)
+    const [pendingOrders, setPendingOrders] = useState(0)
+    const [completedOrders, setCompletedOrders] = useState(0)
+
+    // const fetchOrders = async() => {
+    //     const res = await axios.get(`${BACKEND_URL}/api/v1/order`)
+    //     setOrders(res.data.orders)
+    // } 
+
+    const getOrderStatus = async() => {
+        const res = await axios.get(`${BACKEND_URL}/api/v1/order/status`)
+        setPendingOrders(res.data.pendingOrders)
+        setCompletedOrders(res.data.completedOrders)
+        setTotalOrders(res.data.pendingOrders + res.data.completedOrders)
+    }
+
+    const getProfile = async() => {
+        const res = await axios.get(`${BACKEND_URL}/api/v1/user/profile`) 
+        console.log(res.data)
+
+        if(res.data.success){
+            setFirstName(res.data?.user.firstName)
+            setLastName(res.data?.user.lastName)
+            setEmail(res.data?.user.email)
+            setUsername(res.data?.user.username) 
+            setPhoneNumber(res.data?.user.phone) 
+            setCountry(res.data?.user.country) 
+            setAddress(res.data?.user.address) 
+            if(res.data?.user.photo){
+                setPhotoPreview(`http://localhost:4000/profile/${res.data?.user?.photo?.filename}`)
+            }
+        }
+    }
+
+    useEffect(() => {
+        setPhotoPreview("/icon.png")
+        getProfile()  
+        getOrderStatus()
+    }, []) 
 
     return (
         <>
@@ -22,7 +79,7 @@ const Dashboard = () => {
                         <div className="dashboard-body-content">
                             <div className="dashboard-info">
                                 <div className="dashboard-head">
-                                    <h4 className="dashboard-title">Hello, Dominic</h4>
+                                    <h4 className="dashboard-title">Hello, {user.lastName}</h4>
                                     <p>
                                         From your account dashboard, you can easily check & view your <a href="#">Recent Orders</a>, manage your <a href="#">Shipping and Billing Addresses</a> and
                                         edit your <a href="#">Password</a> and <a href="#">Account Details</a>.
@@ -35,11 +92,11 @@ const Dashboard = () => {
                                             <div className="account-card-body">
                                                 <div className="account-card-header">
                                                     <div className="client-image">
-                                                        <img src="/dominic.jpg" alt="" />
+                                                        <img src={photoPreview} alt="" />
                                                     </div>
                                                     <div className="client-info">
-                                                        <h6>Dominic Sham</h6>
-                                                        <p>Hong Kong</p>
+                                                        <h6>{firstName} {lastName}</h6>
+                                                        <p>{country}</p>
                                                     </div>
                                                 </div>
                                                 <ul className="account-card-footer">
@@ -86,7 +143,7 @@ const Dashboard = () => {
                                                     </div>
                                                     <div className="fun-content">
                                                         <div className="fun-title">
-                                                            <CountUp start={0} end={154} className='counter-number'/>
+                                                            <CountUp start={0} end={totalOrders} className='counter-number'/>
                                                             <p className="fun-text">Total Orders</p>
                                                         </div>
                                                     </div>
@@ -104,7 +161,7 @@ const Dashboard = () => {
                                                     </div>
                                                     <div className="fun-content">
                                                         <div className="fun-title">
-                                                            <CountUp start={0} end={5} className='counter-number'/>
+                                                            <CountUp start={0} end={pendingOrders} className='counter-number'/>
                                                             <p className="fun-text">Pending Orders</p>
                                                         </div>
                                                     </div>
@@ -125,7 +182,7 @@ const Dashboard = () => {
                                                     </div>
                                                     <div className="fun-content">
                                                         <div className="fun-title">
-                                                            <CountUp start={0} end={149} className='counter-number'/>
+                                                            <CountUp start={0} end={completedOrders} className='counter-number'/>
                                                             <p className="fun-text">Completed Orders</p>
                                                         </div>
                                                     </div>

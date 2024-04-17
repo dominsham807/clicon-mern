@@ -57,6 +57,9 @@
     line-height: 20px;
     color: var(--bs-gray-700);
 }
+.shipping-date{
+    padding-left: 5px;
+}
 .shipping-status{
     padding-right: 5px;
 }

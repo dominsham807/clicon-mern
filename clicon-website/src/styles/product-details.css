@@ -285,7 +285,7 @@
     overflow: hidden;
     height: 58px;
     display: flex;
-    /* align-items: center; */
+    align-items: center;
     max-width: 164px;
     border: 2px solid #e4e7e9;
     border-radius: 3px;
