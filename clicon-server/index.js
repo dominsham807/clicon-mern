@@ -42,7 +42,7 @@ const port = process.env.PORT || 4000
 
 app.listen(port, () => {
     connectDB()
-    console.log(  `${chalk.green('✓')} ${chalk.blue(
+    console.log(`${chalk.green('✓')} ${chalk.blue(
         `Listening on port ${port}. Visit http://localhost:${port}/ in your browser.`
     )}`)
 })

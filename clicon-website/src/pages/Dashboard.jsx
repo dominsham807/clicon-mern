@@ -55,7 +55,7 @@ const Dashboard = () => {
             setCountry(res.data?.user.country) 
             setAddress(res.data?.user.address) 
             if(res.data?.user.photo){
-                setPhotoPreview(`http://localhost:4000/profile/${res.data?.user?.photo?.filename}`)
+                setPhotoPreview(`https://clicon-mern.vercel.app/profile/${res.data?.user?.photo?.filename}`)
             }
         }
     }
