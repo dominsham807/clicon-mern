@@ -17,9 +17,11 @@ dotenv.config()
 
 const app = express()
 
-app.use(cors({
-    origin: "https://clicon-web.vercel.app/"
-}))
+const corsOptions = {
+    origin: ["http://localhost:4000", "https://clicon-web.vercel.app"],
+}
+
+app.use(cors(corsOptions))
 
 app.use(morgan('dev'))
 

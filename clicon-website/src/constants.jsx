@@ -1,1 +1,1 @@
-export const BACKEND_URL = 'https://clicon-server.vercel.app/.vercel.app'
+export const BACKEND_URL = 'https://clicon-server.vercel.app'
