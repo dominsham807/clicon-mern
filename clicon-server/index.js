@@ -55,3 +55,5 @@ app.listen(port, () => {
         `Listening on port ${port}. Visit http://localhost:${port}/ in your browser.`
     )}`)
 })
+
+module.exports = app;
