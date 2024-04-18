@@ -27,7 +27,7 @@ const BestDeals = ({ setShowModal, setSelectedProduct }) => {
     const [bestDealsProducts, setBestDealsProducts] = useState([])
 
     const fetchBestDealsProducts = async() => {
-        const res = await axios.get(`${BACKEND_URL}/api/v1/product/bestdeals`)
+        const res = await axios.get(`${BACKEND_URL}/api/product/bestdeals`)
         setBestDealsProducts(res.data.products) 
     }
  

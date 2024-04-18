@@ -15,7 +15,7 @@ const FeaturedProducts = ({ setShowModal, setSelectedProduct }) => {
     const TRANSITION_DURATION = 150
 
     const fetchFeaturedProducts = async() => {
-        const res = await axios.get(`${BACKEND_URL}/api/v1/product/featured`)
+        const res = await axios.get(`${BACKEND_URL}/api/product/featured`)
         setFeaturedProducts(res.data.products) 
     }
 

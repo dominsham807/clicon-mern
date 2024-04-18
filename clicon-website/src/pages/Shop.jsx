@@ -69,7 +69,7 @@ const Shop = ({ setShowModal, setSelectedProduct }) => {
     const [products, setProducts] = useState([])
 
     const fetchAllProducts = async() => {
-        const res = await axios.get(`${BACKEND_URL}/api/v1/product`)
+        const res = await axios.get(`${BACKEND_URL}/api/product`)
         setProducts(res.data.products) 
     }
 

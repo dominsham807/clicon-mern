@@ -19,7 +19,7 @@ const Verify = () => {
     const navigate = useNavigate()
 
     const verifyAccount = async() => {
-        const res = await axios.post(`${BACKEND_URL}/api/v1/auth/verify`, {
+        const res = await axios.post(`${BACKEND_URL}/api/auth/verify`, {
             verificationToken, email
         })
  

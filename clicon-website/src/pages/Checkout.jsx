@@ -37,7 +37,7 @@ const Checkout = () => {
     const handleCheckout = async(e) => {
         e.preventDefault()
         try{
-            const res = await axios.post(`${BACKEND_URL}/api/v1/order`, {
+            const res = await axios.post(`${BACKEND_URL}/api/order`, {
                 userId: user._id,
                 firstName, lastName, email,
                 phone: contact,

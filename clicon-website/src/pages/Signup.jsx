@@ -46,7 +46,7 @@ const Signup = () => {
                 } else if(!checkTandC){
                     toast.error("Please accept the condition to proceed")
                 } else{
-                    const res = await axios.post(`${BACKEND_URL}/api/v1/auth/register`,{
+                    const res = await axios.post(`${BACKEND_URL}/api/auth/register`,{
                         firstName, lastName, username, email, password, confirmPassword
                     })
                     if(res.data.success){

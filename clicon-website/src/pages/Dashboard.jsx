@@ -31,19 +31,19 @@ const Dashboard = () => {
     const [completedOrders, setCompletedOrders] = useState(0)
 
     // const fetchOrders = async() => {
-    //     const res = await axios.get(`${BACKEND_URL}/api/v1/order`)
+    //     const res = await axios.get(`${BACKEND_URL}/api/order`)
     //     setOrders(res.data.orders)
     // } 
 
     const getOrderStatus = async() => {
-        const res = await axios.get(`${BACKEND_URL}/api/v1/order/status`)
+        const res = await axios.get(`${BACKEND_URL}/api/order/status`)
         setPendingOrders(res.data.pendingOrders)
         setCompletedOrders(res.data.completedOrders)
         setTotalOrders(res.data.pendingOrders + res.data.completedOrders)
     }
 
     const getProfile = async() => {
-        const res = await axios.get(`${BACKEND_URL}/api/v1/user/profile`) 
+        const res = await axios.get(`${BACKEND_URL}/api/user/profile`) 
         console.log(res.data)
 
         if(res.data.success){

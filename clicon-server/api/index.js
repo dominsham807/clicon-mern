@@ -34,10 +34,10 @@ app.use(cookieParser(process.env.JWT_SECRET))
 
 app.use(express.static("public"))
 
-app.use("/api/v1/auth", authRoutes)
-app.use("/api/v1/user", userRoutes)
-app.use("/api/v1/product", productRoutes)
-app.use("/api/v1/order", orderRoutes)
+app.use("/auth", authRoutes)
+app.use("/user", userRoutes)
+app.use("/product", productRoutes)
+app.use("/order", orderRoutes)
 
 app.use(errorHandlerMiddleware)
 app.use(notFound)
