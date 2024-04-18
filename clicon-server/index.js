@@ -5,10 +5,11 @@ import cors from "cors"
 import morgan from "morgan"
 import dotenv from "dotenv"
 import cookieParser from "cookie-parser"
-import authRoutes from "./routes/authRoute.js"
-import userRoutes from "./routes/userRoute.js"
-import productRoutes from "./routes/productRoute.js"
-import orderRoutes from "./routes/orderRoute.js"
+import allRoutes from "./routes"
+// import authRoutes from "./routes/authRoute.js"
+// import userRoutes from "./routes/userRoute.js"
+// import productRoutes from "./routes/productRoute.js"
+// import orderRoutes from "./routes/orderRoute.js"
 import { connectDB } from "./db/connect.js"
 import errorHandlerMiddleware from "./middlewares/error-handler.js"
 import notFound from "./middlewares/not-found.js"
@@ -34,14 +35,11 @@ app.use(cookieParser(process.env.JWT_SECRET))
 
 app.use(express.static("public"))
 
-app.get("/", () => {
-    console.log("Backend Clicon Ecommerce")
-})
+// app.get("/", () => {
+//     console.log("Backend Clicon Ecommerce")
+// })
 
-app.use("/api/v1/auth", authRoutes)
-app.use("/api/v1/user", userRoutes)
-app.use("/api/v1/product", productRoutes)
-app.use("/api/v1/order", orderRoutes)
+app.use("/", allRoutes) 
 
 app.use(errorHandlerMiddleware)
 app.use(notFound)
