@@ -33,7 +33,7 @@ const Signin = () => {
         e.preventDefault()
 
         try{
-            const res = await axios.post(`${BACKEND_URL}/api/auth/login`, {
+            const res = await axios.post(`${BACKEND_URL}/api/v1/auth/login`, {
                 email, password
             })
             if(res?.data?.success){ 

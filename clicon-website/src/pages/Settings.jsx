@@ -28,7 +28,7 @@ const Settings = () => {
     const navigate = useNavigate()
 
     const getProfile = async() => {
-        const res = await axios.get(`${BACKEND_URL}/api/user/profile`) 
+        const res = await axios.get(`${BACKEND_URL}/api/v1/user/profile`) 
         console.log(res)
 
         if(res.data.success){
@@ -73,7 +73,7 @@ const Settings = () => {
         }
 
         try{
-            const res = await axios.put(`${BACKEND_URL}/api/user/profile`, data)
+            const res = await axios.put(`${BACKEND_URL}/api/v1/user/profile`, data)
             if(res.data.success) {
                 toast(res.data.message,{type: "success", draggable:false})
                 navigate("/")

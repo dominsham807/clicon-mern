@@ -18,7 +18,7 @@ const TrackOrderDetail = () => {
     const [status, setStatus] = useState("")
 
     const fetchSingleOrder = async() => {
-        const res = await axios.get(`${BACKEND_URL}/api/order/${param.id}`)
+        const res = await axios.get(`${BACKEND_URL}/api/v1/order/${param.id}`)
         console.log(res.data.order)
         setTotalPrice(res.data.order.totalPrice)
         setQuantity(res.data.order.quantity)
