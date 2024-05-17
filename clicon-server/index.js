@@ -39,6 +39,10 @@ app.use(express.static("public"))
 //     console.log("Backend Clicon Ecommerce")
 // })
 
+app.get("/", (req, res) => {
+    res.status(200).json({ message: "Clicon Ecommerce website" })
+})
+
 app.use("/api/v1", allRoutes) 
 
 app.use(errorHandlerMiddleware)
