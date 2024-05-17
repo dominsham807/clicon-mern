@@ -6,9 +6,9 @@ import orderRoutes from "./orderRoute.js"
 
 const router = express()
 
-router.use("/api/v1/auth", authRoutes)
-router.use("/api/v1/user", userRoutes)
-router.use("/api/v1/product", productRoutes)
-router.use("/api/v1/order", orderRoutes)
+router.use("/auth", authRoutes)
+router.use("/user", userRoutes)
+router.use("/product", productRoutes)
+router.use("/order", orderRoutes)
 
 export default router

@@ -39,7 +39,7 @@ app.use(express.static("public"))
 //     console.log("Backend Clicon Ecommerce")
 // })
 
-app.use("/", allRoutes) 
+app.use("/api/v1", allRoutes) 
 
 app.use(errorHandlerMiddleware)
 app.use(notFound)
