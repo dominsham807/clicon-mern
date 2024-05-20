@@ -20,6 +20,8 @@ const app = express()
 
 const corsOptions = {
     origin: ["http://localhost:4000/"],
+    methods: ["POST", "GET", "PUT"],
+    credentials: true
 }
 
 app.use(cors(corsOptions))
