@@ -44,6 +44,12 @@ app.use(express.static("public"))
 // app.get("/", (req, res) => {
 //     res.status(200).json({ message: "Clicon Ecommerce website" })
 // })
+app.get("/", async (req, res, next) => {
+    return res.status(200).json({
+        title: "Express Testing",
+        message: "The app is working properly!",
+    })
+})
 
 app.use("/api/v1", allRoutes) 
 
