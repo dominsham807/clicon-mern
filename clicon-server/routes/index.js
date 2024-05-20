@@ -4,18 +4,18 @@ import userRoutes from "./userRoute.js"
 import productRoutes from "./productRoute.js"
 import orderRoutes from "./orderRoute.js"
 
-const router = express()
+const allRoutes = express()
 
-router.get("/", async (req, res, next) => {
+allRoutes.get("/", async (req, res, next) => {
     return res.status(200).json({
         title: "Express Testing",
         message: "The app is working properly!",
     })
 })
 
-router.use("/auth", authRoutes)
-router.use("/user", userRoutes)
-router.use("/product", productRoutes)
-router.use("/order", orderRoutes)
+allRoutes.use("/auth", authRoutes)
+allRoutes.use("/user", userRoutes)
+allRoutes.use("/product", productRoutes)
+allRoutes.use("/order", orderRoutes)
 
-export default router
+export default allRoutes
