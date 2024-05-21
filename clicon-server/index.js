@@ -5,15 +5,14 @@ import bodyParser from 'body-parser'
 import cors from "cors"
 import morgan from "morgan"
 import dotenv from "dotenv"
-import cookieParser from "cookie-parser"
-import allRoutes from "../routes/index.js"
-// import authRoutes from "./routes/authRoute.js"
-// import userRoutes from "./routes/userRoute.js"
-// import productRoutes from "./routes/productRoute.js"
-// import orderRoutes from "./routes/orderRoute.js"
-import { connectDB } from "../db/connect.js"
-import errorHandlerMiddleware from "../middlewares/error-handler.js"
-import notFound from "../middlewares/not-found.js"
+import cookieParser from "cookie-parser" 
+import authRoutes from "./routes/authRoute.js"
+import userRoutes from "./routes/userRoute.js"
+import productRoutes from "./routes/productRoute.js"
+import orderRoutes from "./routes/orderRoute.js"
+import { connectDB } from "./db/connect.js"
+import errorHandlerMiddleware from "./middlewares/error-handler.js"
+import notFound from "./middlewares/not-found.js"
 
 dotenv.config()
 
@@ -36,7 +35,7 @@ app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true, parameterLimit: 50000 })) 
 app.use(cookieParser(process.env.JWT_SECRET))
 
-app.use(express.static("public"))
+// app.use(express.static("public"))
 
 // app.get("/", () => {
 //     console.log("Backend Clicon Ecommerce")
@@ -46,21 +45,25 @@ app.use(express.static("public"))
 //     res.status(200).json({ message: "Clicon Ecommerce website" })
 // })
 
-app.use("/api/v1", allRoutes) 
+app.use("/auth", authRoutes)
+app.use("/user", userRoutes)
+app.use("/product", productRoutes)
+app.use("/order", orderRoutes)
 
 app.use(errorHandlerMiddleware)
 app.use(notFound)
 
 const port = process.env.PORT || 4000
-// const __dirname = path.resolve()
 
-// if(process.env.NODE_ENV === "production"){
-//     app.use(express.static(path.join(__dirname, "/clicon-website/dist")))
+app.use(express.static(path.join(__dirname, 'client/dist')));
 
-//     app.get("*", (req, res) => {
-//         res.sendFile(path.resolve(__dirname, "clicon-website", "dist", "index.html"))
-//     })
-// }
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
+});
+
+app.get('/', (req, res) => {
+    res.send("Hello from Node API server!");
+});
 
 app.listen(port, () => {
     connectDB()
