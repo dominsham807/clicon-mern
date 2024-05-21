@@ -8,11 +8,11 @@
   },
   "type": "module",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js",
+    "start": "NODE_ENV=production node clicon-server/index.js",
+    "dev": "NODE_ENV=development nodemon clicon-server/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "seed": "node seed.js",
-    "build": "[my-framework] build --output public"
+    "build": "npm install && npm install --prefix clicon-website && npm run build --prefix clicon-website"
   },
   "keywords": [],
   "author": "",

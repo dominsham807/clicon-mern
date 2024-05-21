@@ -1,5 +1,6 @@
 import express from "express"
 import chalk from "chalk"
+import path from "path"
 import bodyParser from 'body-parser'
 import cors from "cors"
 import morgan from "morgan"
@@ -51,6 +52,15 @@ app.use(errorHandlerMiddleware)
 app.use(notFound)
 
 const port = process.env.PORT || 4000
+const __dirname = path.resolve()
+
+if(process.env.NODE_ENV === "production"){
+    app.use(express.static(path.join(__dirname, "/frontend/dist")))
+
+    app.get("*", (req, res) => {
+        res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"))
+    })
+}
 
 app.listen(port, () => {
     connectDB()
