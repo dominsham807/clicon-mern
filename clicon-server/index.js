@@ -19,11 +19,11 @@ dotenv.config()
 const app = express()
 
 const corsOptions = {
-    origin: ["http://localhost:5173/"],
-    methods: ["POST", "GET", "PUT"],
+    origin: "*",
+    methods: ["POST", "GET", "PUT", "DELETE"],
     credentials: true
 }
-
+app.options("", cors(corsOptions))
 app.use(cors(corsOptions))
 
 app.use(morgan('dev'))
