@@ -48,6 +48,10 @@ app.get('/', (req, res) => {
     res.send("Hello from Node API server!");
 });
 
+app.get('/hello', (req, res) => {
+    res.send("Hello from Dominic Sham!");
+});
+
 app.use("api/v1/auth", authRoutes)
 app.use("api/v1/user", userRoutes)
 app.use("api/v1/product", productRoutes)
