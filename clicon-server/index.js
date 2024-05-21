@@ -19,7 +19,7 @@ dotenv.config()
 const app = express()
 
 const corsOptions = {
-    origin: ["http://localhost:4000/"],
+    origin: ["http://localhost:5173/"],
     methods: ["POST", "GET", "PUT"],
     credentials: true
 }
@@ -55,11 +55,13 @@ app.use(notFound)
 
 const port = process.env.PORT || 4000
 
-app.use(express.static(path.join(__dirname, 'client/dist')));
+const __dirname = path.resolve() 
 
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
-});
+// app.use(express.static(path.join(__dirname, 'clicon-website/dist')));
+
+// app.get('*', (req, res) => {
+//     res.sendFile(path.join(__dirname, 'clicon-website', 'dist', 'index.html'));
+// });
 
 app.get('/', (req, res) => {
     res.send("Hello from Node API server!");
