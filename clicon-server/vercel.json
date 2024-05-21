@@ -1,20 +1,8 @@
 {
-    "version": 2,
-    "builds": [
+    "rewrites": [
         {
-            "src": "*.js",
-            "use": "@vercel/node"
+            "source": "/(.*)",
+            "destination": "/api"
         }
-    ],
-    "routes": [
-        {
-            "src": "/(.*)",
-            "dest": "/"
-        }
-    ],
-    "functions": {
-        "routes/*.js": {
-            "maxDuration": 45 
-        }
-    }
+    ]
 }
