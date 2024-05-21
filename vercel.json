@@ -1,8 +1,20 @@
 {
-    "buildCommand": "cd clicon-website && npm install && npm run build",
-    "outputDirectory": "client/dist",
-    "framework": "vite",
-    "rewrites":  [
-        {"source": "/clicon-server/(.*)", "destination": "/clicon-server/index.js"}
+    "version": 2,
+    "builds": [
+      {
+        "src": "./clicon-server/server.js",   
+        "use": "@vercel/node"
+      },
+      {
+        "src": "./clicon-website/build",     
+        "use": "@vercel/static"
+      }
+    ], 
+  
+    "rewrites": [
+      {
+        "source": "/(.*)",
+        "destination": "/clicon-server/index.js"
+      }
     ]
-}
+  }
