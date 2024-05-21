@@ -6,14 +6,14 @@ import cors from "cors"
 import morgan from "morgan"
 import dotenv from "dotenv"
 import cookieParser from "cookie-parser"
-import allRoutes from "./routes/index.js"
+import allRoutes from "../routes/index.js"
 // import authRoutes from "./routes/authRoute.js"
 // import userRoutes from "./routes/userRoute.js"
 // import productRoutes from "./routes/productRoute.js"
 // import orderRoutes from "./routes/orderRoute.js"
-import { connectDB } from "./db/connect.js"
-import errorHandlerMiddleware from "./middlewares/error-handler.js"
-import notFound from "./middlewares/not-found.js"
+import { connectDB } from "../db/connect.js"
+import errorHandlerMiddleware from "../middlewares/error-handler.js"
+import notFound from "../middlewares/not-found.js"
 
 dotenv.config()
 
