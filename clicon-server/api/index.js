@@ -6,13 +6,13 @@ import cors from "cors"
 import morgan from "morgan"
 import dotenv from "dotenv"
 import cookieParser from "cookie-parser" 
-import authRoutes from "./routes/authRoute.js"
-import userRoutes from "./routes/userRoute.js"
-import productRoutes from "./routes/productRoute.js"
-import orderRoutes from "./routes/orderRoute.js"
-import { connectDB } from "./db/connect.js"
-import errorHandlerMiddleware from "./middlewares/error-handler.js"
-import notFound from "./middlewares/not-found.js"
+import authRoutes from "../routes/authRoute.js"
+import userRoutes from "../routes/userRoute.js"
+import productRoutes from "../routes/productRoute.js"
+import orderRoutes from "../routes/orderRoute.js"
+import { connectDB } from "../db/connect.js"
+import errorHandlerMiddleware from "../middlewares/error-handler.js"
+import notFound from "../middlewares/not-found.js"
 
 dotenv.config()
 
@@ -44,6 +44,9 @@ app.use(cookieParser(process.env.JWT_SECRET))
 // app.get("/", (req, res) => {
 //     res.status(200).json({ message: "Clicon Ecommerce website" })
 // })
+app.get('/', (req, res) => {
+    res.send("Hello from Node API server!");
+});
 
 app.use("api/v1/auth", authRoutes)
 app.use("api/v1/user", userRoutes)
@@ -63,9 +66,7 @@ const __dirname = path.resolve()
 //     res.sendFile(path.join(__dirname, 'clicon-website', 'dist', 'index.html'));
 // });
 
-app.get('/', (req, res) => {
-    res.send("Hello from Node API server!");
-});
+
 
 app.listen(port, () => {
     connectDB()
