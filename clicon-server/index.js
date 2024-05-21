@@ -6,13 +6,13 @@ import cors from "cors"
 import morgan from "morgan"
 import dotenv from "dotenv"
 import cookieParser from "cookie-parser" 
-import authRoutes from "../routes/authRoute.js"
-import userRoutes from "../routes/userRoute.js"
-import productRoutes from "../routes/productRoute.js"
-import orderRoutes from "../routes/orderRoute.js"
-import { connectDB } from "../db/connect.js"
-import errorHandlerMiddleware from "../middlewares/error-handler.js"
-import notFound from "../middlewares/not-found.js"
+import authRoutes from "./routes/authRoute.js"
+import userRoutes from "./routes/userRoute.js"
+import productRoutes from "./routes/productRoute.js"
+import orderRoutes from "./routes/orderRoute.js"
+import { connectDB } from "./db/connect.js"
+import errorHandlerMiddleware from "./middlewares/error-handler.js"
+import notFound from "./middlewares/not-found.js"
 
 dotenv.config()
 
@@ -52,10 +52,10 @@ app.get('/hello', (req, res) => {
     res.send("Hello from Dominic Sham!");
 });
 
-app.use("api/v1/auth", authRoutes)
-app.use("api/v1/user", userRoutes)
-app.use("api/v1/product", productRoutes)
-app.use("api/v1/order", orderRoutes)
+app.use("/api/v1/auth", authRoutes)
+app.use("/api/v1/user", userRoutes)
+app.use("/api/v1/product", productRoutes)
+app.use("/api/v1/order", orderRoutes)
 
 app.use(errorHandlerMiddleware)
 app.use(notFound)
