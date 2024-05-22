@@ -44,11 +44,11 @@ app.use(cookieParser(process.env.JWT_SECRET))
 // app.get("/", (req, res) => {
 //     res.status(200).json({ message: "Clicon Ecommerce website" })
 // })
-app.get('/', (req, res) => {
+app.get('/api', (req, res) => {
     res.send("Hello from Node API server!");
 });
 
-app.get('/hello', (req, res) => {
+app.get('/api/hello', (req, res) => {
     res.send("Hello from Dominic Sham!");
 });
 
