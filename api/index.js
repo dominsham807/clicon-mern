@@ -18,6 +18,8 @@ dotenv.config()
 
 const app = express()
 
+connectDB()
+
 const corsOptions = {
     origin: ['http://localhost:4000'],
     methods: ["POST", "GET", "PUT", "DELETE"],
@@ -71,9 +73,8 @@ const __dirname = path.resolve()
 // });
 
 
-
 app.listen(port, () => {
-    connectDB()
+    // connectDB()
     console.log(`${chalk.green('✓')} ${chalk.blue(
         `Listening on port ${port}. Visit http://localhost:${port}/ in your browser.`
     )}`)
