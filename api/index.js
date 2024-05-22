@@ -21,7 +21,7 @@ const app = express()
 connectDB()
 
 const corsOptions = {
-    origin: ['http://localhost:4000'],
+    origin: ['https://clicon-web.vercel.app/', 'http://localhost:5173/'],
     methods: ["POST", "GET", "PUT", "DELETE"],
     credentials: true
 }
