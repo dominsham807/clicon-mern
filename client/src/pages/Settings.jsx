@@ -40,7 +40,7 @@ const Settings = () => {
             setCountry(res.data?.user.country) 
             setAddress(res.data?.user.address) 
             if(res.data?.user.photo){
-                setPhotoPreview(`https://clicon-server.vercel.app/profile/${res.data?.user?.photo?.filename}`)
+                setPhotoPreview(`http://localhost:4000/profile/${res.data?.user?.photo?.filename}`)
             }
         }
     }
