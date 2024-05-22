@@ -19,7 +19,7 @@ dotenv.config()
 const app = express()
 
 const corsOptions = {
-    origin: "*",
+    origin: ['http://localhost:4000'],
     methods: ["POST", "GET", "PUT", "DELETE"],
     credentials: true
 }
@@ -35,7 +35,7 @@ app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true, parameterLimit: 50000 })) 
 app.use(cookieParser(process.env.JWT_SECRET))
 
-// app.use(express.static("public"))
+app.use(express.static("public"))
 
 // app.get("/", () => {
 //     console.log("Backend Clicon Ecommerce")
