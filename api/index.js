@@ -40,7 +40,8 @@ app.use(cookieParser(process.env.JWT_SECRET))
 const __dirname = path.resolve() 
 console.log(__dirname)
 
-app.use(express.static(__dirname + "/public/"));
+app.use("public/", express.static("public/"));
+// app.use(express.static(__dirname + "/public/"));
 
 // app.get("/", () => {
 //     console.log("Backend Clicon Ecommerce")
