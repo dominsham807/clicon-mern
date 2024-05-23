@@ -37,10 +37,9 @@ app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true, parameterLimit: 50000 })) 
 app.use(cookieParser(process.env.JWT_SECRET))
 
-const __dirname = path.resolve() 
-console.log(__dirname)
+const __dirname = path.resolve()  
 
-app.use("/images/products", express.static(path.join(__dirname, "images", "products")))
+app.use("/api/images/products", express.static(path.join(__dirname, "images", "products")))
 
 // if (process.env.NODE_ENV === "production") { 
 //     app.use(express.static(path.resolve(__dirname, 'client', 'build')));
