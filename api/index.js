@@ -40,7 +40,7 @@ app.use(cookieParser(process.env.JWT_SECRET))
 const __dirname = path.resolve() 
 console.log(__dirname)
 
-app.use("/images", express.static(path.join(__dirname, "/images")))
+app.use("/images", express.static(path.join(__dirname, "images")))
 
 // if (process.env.NODE_ENV === "production") { 
 //     app.use(express.static(path.resolve(__dirname, 'client', 'build')));
