@@ -40,18 +40,18 @@ app.use(cookieParser(process.env.JWT_SECRET))
 const __dirname = path.resolve() 
 console.log(__dirname)
 
-// app.use(express.static("public"));
+app.use("/images", express.static(path.join(__dirname, "/images")))
 
-if (process.env.NODE_ENV === "production") { 
-    app.use(express.static(path.resolve(__dirname, 'client', 'build')));
-    app.get("*", (req, res) => {
-        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'),function (err) {
-            if(err) {
-                res.status(500).send(err)
-            }
-        });
-    })
-}
+// if (process.env.NODE_ENV === "production") { 
+//     app.use(express.static(path.resolve(__dirname, 'client', 'build')));
+//     app.get("*", (req, res) => {
+//         res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'),function (err) {
+//             if(err) {
+//                 res.status(500).send(err)
+//             }
+//         });
+//     })
+// }
 
 app.get('/api', (req, res) => {
     res.send("Hello from Node API server!");
