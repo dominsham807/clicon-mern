@@ -40,16 +40,20 @@ app.use(cookieParser(process.env.JWT_SECRET))
 const __dirname = path.resolve() 
 console.log(__dirname)
 
-app.use(express.static("public"));
-// app.use(express.static(__dirname + "/public/"));
+// app.use(express.static("public"));
 
-// app.get("/", () => {
-//     console.log("Backend Clicon Ecommerce")
-// })
+if (process.env.NODE_ENV === "production") {
+    const path = require("path");
+    app.use(express.static(path.resolve(__dirname, 'client', 'dist')));
+    app.get("*", (req, res) => {
+        res.sendFile(path.resolve(__dirname, 'client', 'dist', 'index.html'),function (err) {
+            if(err) {
+                res.status(500).send(err)
+            }
+        });
+    })
+}
 
-// app.get("/", (req, res) => {
-//     res.status(200).json({ message: "Clicon Ecommerce website" })
-// })
 app.get('/api', (req, res) => {
     res.send("Hello from Node API server!");
 });
