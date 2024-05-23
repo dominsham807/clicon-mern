@@ -25,7 +25,7 @@ const corsOptions = {
     methods: ["POST", "GET", "PUT", "DELETE"],
     credentials: true
 }
-app.options("", cors(corsOptions))
+// app.options("", cors(corsOptions))
 app.use(cors(corsOptions))
 
 app.use(morgan('dev'))
