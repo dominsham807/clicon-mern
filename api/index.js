@@ -39,7 +39,10 @@ app.use(cookieParser(process.env.JWT_SECRET))
 
 const __dirname = path.resolve()  
 
-app.use("/api/images/products", express.static(path.join(__dirname, "images", "products")))
+app.use(
+    "/api/images/products",
+    express.static(path.join(__dirname, "images", "products")),
+);
 
 // if (process.env.NODE_ENV === "production") { 
 //     app.use(express.static(path.resolve(__dirname, 'client', 'build')));
