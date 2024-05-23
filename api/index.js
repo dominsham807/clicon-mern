@@ -37,7 +37,10 @@ app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true, parameterLimit: 50000 })) 
 app.use(cookieParser(process.env.JWT_SECRET))
 
-app.use(express.static("public"))
+const __dirname = path.resolve() 
+console.log(__dirname)
+
+app.use(express.static(path.join(__dirname, "public")))
 
 // app.get("/", () => {
 //     console.log("Backend Clicon Ecommerce")
@@ -64,7 +67,7 @@ app.use(notFound)
 
 const port = process.env.PORT || 4000
 
-const __dirname = path.resolve() 
+
 
 // app.use(express.static(path.join(__dirname, 'clicon-website/dist')));
 
